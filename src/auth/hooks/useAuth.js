@@ -29,7 +29,7 @@ export const useAuth = () => {
                 user,
             }));
             sessionStorage.setItem('token', `Bearer ${token}`);
-            navigate('/users');
+            navigate('/albums');
         } catch (error) {
             if (error.response?.status == 401) {
                 Swal.fire('Error Login', 'Username o password invalidos', 'error');

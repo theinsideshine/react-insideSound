@@ -10,6 +10,7 @@ export const UserRow = ({ id, username, email, admin }) => {
             <td>{id}</td>
             <td>{username}</td>
             <td>{email}</td>
+            <td>{admin  ? 'Si' : 'No'}</td>
 
             {!login.isAdmin ||
                 <>
@@ -27,12 +28,12 @@ export const UserRow = ({ id, username, email, admin }) => {
                             update
                         </button>
                     </td>
-                    <td>
+                    {/* <td>
                         <NavLink className={'btn btn-secondary btn-sm'}
                             to={'/users/edit/' + id} >
                             update route
                         </NavLink>
-                    </td>
+                    </td> */}
                     <td>
                         <button
                             type="button"

@@ -5,9 +5,9 @@ export const Navbar = () => {
 
     const { login, handlerLogout } = useAuth();
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-bottom-dark">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">UsersApp</a>
+                <a className="navbar-brand" href="#">InsideSound</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -15,10 +15,17 @@ export const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/users">
-                                Usuarios
+                            <NavLink className="nav-link" to="/Albums">
+                                Albumes
                             </NavLink>
                         </li>
+                        {!login.isAdmin ||
+                            <li className="nav-item">
+                                 <NavLink className="nav-link" to="/users">
+                                    Usuarios
+                                </NavLink>
+                            </li>
+                        }
                         {!login.isAdmin ||
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/users/register">
