@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AlbumData from './data/AlbumData.js';
 import { useNavigate } from 'react-router-dom';
 import { Footer } from '../../components/layout/Footer.jsx';
+import { useAlbums } from '../../hooks/useAlbums.js';
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -23,9 +24,24 @@ export default function AlbumPage() {
 
   const navigate = useNavigate();
 
+  const {
+    albums,    
+    isLoading,    
+    getAlbums,
+} = useAlbums();
+
+
+
+useEffect(() => {
+  getAlbums();
+  /* console.log('estoy en useEffect');
+  console.log(albums); */
+}, []);
+
   const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
   function handleClick(albumId) {
+  /*   console.log(albumId) */
     setSelectedAlbumId(albumId);
   }
 
@@ -34,6 +50,17 @@ export default function AlbumPage() {
       navigate(`/albums/play/${selectedAlbumId}`);
     }
   }, [selectedAlbumId, navigate]);
+
+  if (isLoading) {
+    return (
+        <div className="container my-4">
+            {/* <h4>Cargando ...</h4> */}
+            <div className="spinner-border text-info" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    );
+}
 
 
   return (
@@ -78,34 +105,41 @@ export default function AlbumPage() {
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {AlbumData.album.map((album) => (
-              <Grid item key={album.id} xs={12} sm={6} md={4}>
-                <Card
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                >
-                  <CardMedia
-                    component="div"
-                    sx={{
-                      // 16:9
-                      pt: '56.25%',
-                    }}
-                    image={album.image}
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {album.title}
-                    </Typography>
-                    <Typography>
-                      {album.artist}-{album.age}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" onClick={() => handleClick(album.id)}>View</Button>
-                    <Button size="small">Edit</Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
+            {albums && albums.length > 0 ? 
+              (
+                albums.map((album) => (
+                  <Grid item key={album.id} xs={12} sm={6} md={4}>
+                    <Card
+                      sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+                    >
+                      <CardMedia
+                        component="div"
+                        sx={{
+                          // 16:9
+                          pt: '56.25%',
+                        }}
+                        image={album.image}
+                      />
+                      <CardContent sx={{ flexGrow: 1 }}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          {album.title}
+                        </Typography>
+                        <Typography>
+                          {album.artist}-{album.age}
+                        </Typography>
+                      
+                      </CardContent>
+                      <CardActions>
+                        <Button size="small" onClick={() => handleClick(album.id)}>View</Button>
+                        <Button size="small">Edit</Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))
+              ) : (
+                <Typography variant="body1">No hay álbumes disponibles.</Typography>
+              )
+            }
           </Grid>
         </Container>
       </main>
