@@ -7,7 +7,7 @@ export const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-bottom-dark">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">InsideSound</a>
+                <a className="navbar-brand" href="#" style={{ color: 'blue', textDecoration: 'none' }}>InsideSound</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -15,10 +15,11 @@ export const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/Albums">
+                            <NavLink className="nav-link" to="/albums">
                                 Albumes
                             </NavLink>
                         </li>
+                        
                         {!login.isAdmin ||
                             <li className="nav-item">
                                  <NavLink className="nav-link" to="/users">
