@@ -11,7 +11,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import AlbumData from './data/AlbumData.js';
 import { useNavigate } from 'react-router-dom';
 import { Footer } from '../../components/layout/Footer.jsx';
 import { useAlbums } from '../../hooks/useAlbums.js';
@@ -33,15 +32,12 @@ export default function AlbumPage() {
 
 
 useEffect(() => {
-  getAlbums();
-  /* console.log('estoy en useEffect');
-  console.log(albums); */
+  getAlbums(); 
 }, []);
 
   const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
-  function handleClick(albumId) {
-  /*   console.log(albumId) */
+  function handleClick(albumId) {  
     setSelectedAlbumId(albumId);
   }
 
@@ -130,7 +126,7 @@ useEffect(() => {
                       
                       </CardContent>
                       <CardActions>
-                        <Button size="small" onClick={() => handleClick(album.id)}>View</Button>
+                        <Button size="small" onClick={() => handleClick(album.id)}>Play</Button>
                         <Button size="small">Edit</Button>
                       </CardActions>
                     </Card>

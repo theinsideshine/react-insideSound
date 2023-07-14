@@ -8,9 +8,6 @@ import { colors } from './colorScheme';
    const {tracks} = props;
 
    
-  
-  console.log(tracks);
-
  
   return (
 

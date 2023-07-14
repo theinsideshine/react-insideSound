@@ -30,9 +30,6 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
- /*  console.log('estoy en useEffect'); 
-  
-  console.log(albums[0].tracks); */
 }, [albums]);
   
  
@@ -82,7 +79,7 @@ useEffect(() => {
                     />
                   </div>
                   <br></br>
-                  {/* Se debe generarn una nueva matriz trracks ya que no acepta constantes player1 */}
+                  {/* Se debe generar una nueva matriz trracks ya que no acepta constantes player1 */}
                   <Player1 tracks={albums[id-1].tracks.slice()} /> 
                 </Container>
               ): (

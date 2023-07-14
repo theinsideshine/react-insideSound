@@ -30,7 +30,7 @@ export const LoginPage = () => {
   const { handlerLogin } = useAuth();
   
   const [loginForm, setLoginForm] =  useState(initialLoginForm);
-  console.log(loginForm);
+ // console.log(loginForm);
 
   const onSubmit = (event) => {
     event.preventDefault();
