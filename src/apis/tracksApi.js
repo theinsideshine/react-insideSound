@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const usersApi = axios.create({
-    baseURL: `${import.meta.env.VITE_API_MSVC_SECURITY_URL}/users`
+const tracksApi = axios.create({
+    baseURL: `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks`
 });
 
-usersApi.interceptors.request.use(config => {
+tracksApi.interceptors.request.use(config => {
     config.headers = {
         ...config.headers,
         'Authorization': sessionStorage.getItem('token'),
@@ -12,4 +12,4 @@ usersApi.interceptors.request.use(config => {
     return config;
 });
 
-export default usersApi;
+export default tracksApi;

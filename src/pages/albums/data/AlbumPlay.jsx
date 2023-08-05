@@ -52,7 +52,7 @@ useEffect(() => {
         style={{
           backgroundImage: `url("/public/images/fondo-marmol.jpg")`, // Ajusta la ruta de la imagen aquí
           backgroundRepeat: 'repeat',
-          height: '100vh', // Ajusta la altura según tus necesidades
+          height: '130vh', // Ajusta la altura según tus necesidades
 
         }}>
         <Box
@@ -75,12 +75,15 @@ useEffect(() => {
                         borderRadius: '5%',
                         overflow: 'hidden',
                       }}
-                      image={albums[id-1].image}
+                      image={`http://localhost:8090/msvc-albums/albums/img/${id}`} // Use the correct URL format
+                      onError={(e) => {
+                        e.target.src = '/public/images/image-not-available.jpg'; // Ruta de la imagen vacía o de respaldo
+                      }}
                     />
                   </div>
                   <br></br>
-                  {/* Se debe generar una nueva matriz trracks ya que no acepta constantes player1 */}
-                  <Player1 tracks={albums[id-1].tracks.slice()} /> 
+                  {/* Se debe generar una nueva matriz tracks ya que no acepta constantes player1 */}
+                  <Player1 id={id} />
                 </Container>
               ): (
                 <Typography variant="body1">No hay álbumes disponibles.</Typography>

@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const usersApi = axios.create({
-    baseURL: `${import.meta.env.VITE_API_MSVC_SECURITY_URL}/users`
+const albumsApi = axios.create({
+    baseURL: `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/albums`
 });
 
-usersApi.interceptors.request.use(config => {
+albumsApi.interceptors.request.use(config => {
     config.headers = {
         ...config.headers,
         'Authorization': sessionStorage.getItem('token'),
@@ -12,4 +12,4 @@ usersApi.interceptors.request.use(config => {
     return config;
 });
 
-export default usersApi;
+export default albumsApi;

@@ -1,12 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import AlbumData from "../../../pages/albums/data/AlbumData";
-
-
 
 export const albumsSlice = createSlice({
     name: 'albums',
     initialState: {
-        albums: AlbumData.album,                
+        albums: [],                
         isLoading: true,
     },
     reducers: {

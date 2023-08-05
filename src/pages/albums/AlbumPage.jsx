@@ -31,6 +31,7 @@ export default function AlbumPage() {
 
 
 
+
 useEffect(() => {
   getAlbums(); 
 }, []);
@@ -78,15 +79,7 @@ useEffect(() => {
           }}
         >
           <Container maxWidth="sm">
-            <Typography
-              component="h3"
-              variant="h4"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              Albumes
-            </Typography>
+            
 
             <Stack
               sx={{ pt: 4 }}
@@ -114,7 +107,10 @@ useEffect(() => {
                           // 16:9
                           pt: '56.25%',
                         }}
-                        image={album.image}
+                        image={`http://localhost:8090/msvc-albums/albums/img/${album.id}`} // Use the correct URL format
+                        onError={(e) => {
+                          e.target.src = '/public/images/image-not-available.jpg'; // Ruta de la imagen vacía o de respaldo
+                        }}
                       />
                       <CardContent sx={{ flexGrow: 1 }}>
                         <Typography gutterBottom variant="h5" component="h2">
