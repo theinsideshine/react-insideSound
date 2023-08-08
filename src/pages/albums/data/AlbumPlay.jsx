@@ -1,5 +1,4 @@
 import {React, useEffect } from 'react'
-import  Player1  from '../../../components/album/Player1'
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import CardMedia from '@mui/material/CardMedia';
@@ -9,6 +8,8 @@ import { CssBaseline, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Footer } from '../../../components/layout/Footer';
 import { useAlbums } from '../../../hooks/useAlbums';
+
+import AudioPlayerIs from '../../../components/album/AudioPlayerIs';
 
 
 const defaultTheme = createTheme();
@@ -52,7 +53,8 @@ useEffect(() => {
         style={{
           backgroundImage: `url("/public/images/fondo-marmol.jpg")`, // Ajusta la ruta de la imagen aquí
           backgroundRepeat: 'repeat',
-          height: '130vh', // Ajusta la altura según tus necesidades
+          // height: '130vh', // Ajusta la altura según tus necesidades
+          minHeight: '100vh', // Cambié 'height' a 'minHeight' para que se ajuste al contenido
 
         }}>
         <Box
@@ -64,26 +66,10 @@ useEffect(() => {
         >
           {albums && albums.length  >0 ?  
               (
-                <Container maxWidth="sm">
-                  
+                <Container maxWidth="sm">                 
                   <div>
-                    <CardMedia
-                      component="div"
-                      sx={{
-                        // 16:9
-                        pt: '50%',
-                        borderRadius: '5%',
-                        overflow: 'hidden',
-                      }}
-                      image={`http://localhost:8090/msvc-albums/albums/img/${id}`} // Use the correct URL format
-                      onError={(e) => {
-                        e.target.src = '/public/images/image-not-available.jpg'; // Ruta de la imagen vacía o de respaldo
-                      }}
-                    />
-                  </div>
-                  <br></br>
-                  {/* Se debe generar una nueva matriz tracks ya que no acepta constantes player1 */}
-                  <Player1 id={id} />
+                                       <AudioPlayerIs id={id}/>
+                  </div>                
                 </Container>
               ): (
                 <Typography variant="body1">No hay álbumes disponibles.</Typography>

@@ -23,14 +23,13 @@ export default function AlbumPage() {
 
   const navigate = useNavigate();
 
+  const  imageURL= `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/albums/img`; 
+
   const {
     albums,    
     isLoading,    
     getAlbums,
 } = useAlbums();
-
-
-
 
 useEffect(() => {
   getAlbums(); 
@@ -48,6 +47,7 @@ useEffect(() => {
     }
   }, [selectedAlbumId, navigate]);
 
+  
   if (isLoading) {
     return (
         <div className="container my-4">
@@ -107,7 +107,10 @@ useEffect(() => {
                           // 16:9
                           pt: '56.25%',
                         }}
-                        image={`http://localhost:8090/msvc-albums/albums/img/${album.id}`} // Use the correct URL format
+                        
+                        image={`${imageURL}/${album.id}`} // Use the correct URL format
+                       
+                        
                         onError={(e) => {
                           e.target.src = '/public/images/image-not-available.jpg'; // Ruta de la imagen vacía o de respaldo
                         }}
@@ -122,8 +125,8 @@ useEffect(() => {
                       
                       </CardContent>
                       <CardActions>
-                        <Button size="small" onClick={() => handleClick(album.id)}>Play</Button>
-                        <Button size="small">Edit</Button>
+                        <Button size="small" onClick={() => handleClick(album.id)}>Reproducir</Button>
+                        <Button size="small">Editar</Button>
                       </CardActions>
                     </Card>
                   </Grid>
