@@ -5,7 +5,8 @@ desde https://nodejs.org/es bajar e instalar la ultima versione estable
 para comprobar la instalacion desde un consola de comando tirar el comando 
 
 node --version 
-[](images/node-version.png)
+
+![](images/node-version.png)
 
 desde esta url: https://github.com/theinsideshine/react-insideSound/tree/without-backend
 
