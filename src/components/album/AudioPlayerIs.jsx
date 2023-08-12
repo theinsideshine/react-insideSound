@@ -5,6 +5,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { findAllByAlbumId } from '../../services/tracksService';
+import { data, data2 } from '../../pages/albums/data/TrackData';
 
 function AudioPlayerIs(props) {
   const [tracks, setTracks] = useState([]);
@@ -18,15 +19,16 @@ function AudioPlayerIs(props) {
   const audioRef = useRef(null);
  
   useEffect(() => {
-    // Fetch tracks from the backend using your service
-    findAllByAlbumId(props.id)
-      .then(response => {
-        const data = response.data; // Extract the data from the response
-        setTracks(data);
-        setSelectedTrack(data[0]); // Select the first track by default
-       // console.log(data);
-      })
-      .catch(error => console.error('Error fetching tracks:', error));
+   
+  
+    setTracks(data);
+    setSelectedTrack(data[0]); // Select the first track by default
+   
+        
+       
+        
+        
+      
      
   }, [props.id]);
   
@@ -50,11 +52,11 @@ function AudioPlayerIs(props) {
           <CardMedia
             component="img"
             height="300"
-            image={`${imageURL}/${selectedTrack.id}`} // Assuming id is the identifier for the track
+            image={`${imageURL}/${selectedTrack.id}.jpg`} // Assuming id is the identifier for the track
             alt="Imagen de portada"
           />
           <audio ref={audioRef} controls style={{ width: '100%' }}>
-            <source src={`${mp3URL}/${selectedTrack.id}`} type="audio/mpeg" />
+            <source src={`${mp3URL}/${selectedTrack.id}.mp3`} type="audio/mpeg" />
             Tu navegador no soporta la reproducción de audio.
           </audio>
         </Card>

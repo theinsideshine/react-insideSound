@@ -25,6 +25,8 @@ export default function AlbumPage() {
 
   const  imageURL= `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/albums/img`; 
 
+  console.log('imageURL: '+imageURL);
+
   const {
     albums,    
     isLoading,    
@@ -99,10 +101,10 @@ useEffect(() => {
                           <CardMedia
                             component="div"
                             sx={{
-                              // 16:9
+                              // 16:9 
                               pt: '56.25%',
                             }}
-                            image={`${imageURL}/${album.id}`} // Use the correct URL format
+                            image={`${imageURL}/${album.id}.jpg`} // Use the correct URL format
                             onError={(e) => {
                               e.target.src = '/public/images/image-not-available.jpg'; // Ruta de la imagen vacía o de respaldo
                             }}

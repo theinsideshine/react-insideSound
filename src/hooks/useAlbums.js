@@ -14,9 +14,10 @@ export const useAlbums = () => {
     const getAlbums =async() => {
                    
         try { 
-            //const result = AlbumData.album;            
-            const result = await findAll();
-            dispatch(loadingAlbums(result.data));
+            const result = AlbumData;  
+            console.log('album es:'+result);          
+            //const result = await findAll();
+            dispatch(loadingAlbums(result));
         } catch (error) {
             console.log(error);
         }

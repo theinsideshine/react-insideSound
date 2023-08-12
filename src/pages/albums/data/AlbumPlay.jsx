@@ -51,7 +51,7 @@ useEffect(() => {
       <CssBaseline />
       <main
         style={{
-          backgroundImage: `url("/public/images/fondo-marmol.jpg")`, // Ajusta la ruta de la imagen aquí
+          backgroundImage: ``, // Ajusta la ruta de la imagen aquí
           backgroundRepeat: 'repeat',
           // height: '130vh', // Ajusta la altura según tus necesidades
           minHeight: '100vh', // Cambié 'height' a 'minHeight' para que se ajuste al contenido
