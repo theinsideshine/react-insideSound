@@ -14,7 +14,7 @@ bajarse el . zip, chequer que el branck sea without-backend
 ![](images/git-branch.jpg)
 
 
-descomprimir el downloadn ir a la carpeta nueva y abrir un consola
+descomprimir ell downloadn ir a la carpeta nueva y abrir un consola
 correr npm install 
 
 
