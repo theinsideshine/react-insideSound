@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import CardMedia from '@mui/material/CardMedia';
 
 import { useParams } from 'react-router-dom';
-import { CssBaseline, Typography } from '@mui/material';
+import { CssBaseline, Grid, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Footer } from '../../../components/layout/Footer';
 import { useAlbums } from '../../../hooks/useAlbums';
@@ -46,38 +46,39 @@ useEffect(() => {
 }
   
 
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <CssBaseline />
-      <main
-        style={{
-          backgroundImage: `url("/public/images/fondo-marmol.jpg")`, // Ajusta la ruta de la imagen aquí
-          backgroundRepeat: 'repeat',
-          // height: '130vh', // Ajusta la altura según tus necesidades
-          minHeight: '100vh', // Cambié 'height' a 'minHeight' para que se ajuste al contenido
-
-        }}>
-        <Box
-          sx={{
-            bgcolor: 'transparent',
-            pt: 8,
-            pb: 6,
-          }}
-        >
-          {albums && albums.length  >0 ?  
-              (
-                <Container maxWidth="sm">                 
-                  <div>
-                                       <AudioPlayerIs id={id}/>
-                  </div>                
-                </Container>
-              ): (
-                <Typography variant="body1">No hay álbumes disponibles.</Typography>
-              )
-            } 
-        </Box>
-      </main>
-      <Footer />
-    </ThemeProvider>
-  )
+return (
+  <ThemeProvider theme={defaultTheme}>
+    <CssBaseline />
+    <main
+      style={{
+        minHeight: '100vh',
+      }}
+    >
+      <Box
+        sx={{
+          bgcolor: 'transparent',
+          pt: 8,
+          pb: 6,
+        }}
+      >
+        {albums && albums.length > 0 ? (
+          <Container>
+            <Grid container spacing={1}> {/* Agregamos el container de Material-UI */}
+             
+              <Grid item xs={12}> {/* Componente AudioPlayerIs ocupando 10 columnas */}
+                <div>
+                  <AudioPlayerIs id={id} />
+                </div>
+              </Grid>
+              
+            </Grid>
+          </Container>
+        ) : (
+          <Typography variant="body1">No hay álbumes disponibles.</Typography>
+        )}
+      </Box>
+    </main>
+    <Footer />
+  </ThemeProvider>
+);
 }

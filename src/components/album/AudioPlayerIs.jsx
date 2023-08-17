@@ -4,63 +4,95 @@ import CardMedia from '@mui/material/CardMedia';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
+import WaveSurfer from 'wavesurfer.js';
 import { findAllByAlbumId } from '../../services/tracksService';
 
 function AudioPlayerIs(props) {
   const [tracks, setTracks] = useState([]);
   const [selectedTrack, setSelectedTrack] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  const  imageURL= `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/img`;
-  const  mp3URL= `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/mp3`;
-  const  trackURL= `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks`;
+  const imageURL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/img`;
+  const mp3URL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/mp3`;
 
+  const waveSurferRef = useRef(null);
 
-  const audioRef = useRef(null);
- 
   useEffect(() => {
-    // Fetch tracks from the backend using your service
+    waveSurferRef.current = WaveSurfer.create({
+      container: '#waveform',
+      waveColor: 'blue',
+      progressColor: 'gray',
+      barWidth: 2,
+      barHeight: 1,
+    });
+
     findAllByAlbumId(props.id)
       .then(response => {
-        const data = response.data; // Extract the data from the response
+        const data = response.data;
         setTracks(data);
-        setSelectedTrack(data[0]); // Select the first track by default
-       // console.log(data);
+        setSelectedTrack(data[0]);
       })
       .catch(error => console.error('Error fetching tracks:', error));
-     
   }, [props.id]);
-  
+
   useEffect(() => {
-    console.log('Updated tracks:', tracks);
-  }, [tracks]);
-  
-  const handleTrackSelect = (track) => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.load();
-      audioRef.current.play();
+    if (selectedTrack) {
+      if (waveSurferRef.current) {
+        waveSurferRef.current.load(`${mp3URL}/${selectedTrack.id}`);
+      }
     }
+  }, [selectedTrack]);
+
+  useEffect(() => {
+    if (waveSurferRef.current) {
+      if (isPlaying) {
+        waveSurferRef.current.play();
+      } else {
+        waveSurferRef.current.pause();
+      }
+    }
+  }, [isPlaying]);
+
+  const handleTrackSelect = track => {
+    setIsPlaying(false);
     setSelectedTrack(track);
   };
 
+  const togglePlay = () => {
+    setIsPlaying(prevState => !prevState);
+  };
+
   return (
-    <div style={{ width: '500px', height: '500px' }}>
-      {selectedTrack && (
-        <Card style={{ marginBottom: '10px' }}>
-          <CardMedia
-            component="img"
-            height="300"
-            image={`${imageURL}/${selectedTrack.id}`} // Assuming id is the identifier for the track
-            alt="Imagen de portada"
-          />
-          <audio ref={audioRef} controls style={{ width: '100%' }}>
-            <source src={`${mp3URL}/${selectedTrack.id}`} type="audio/mpeg" />
-            Tu navegador no soporta la reproducción de audio.
-          </audio>
-        </Card>
-      )}
-      <List style={{ overflowY: 'auto', maxHeight: '200px' }}>
-        {tracks.map((track) => (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{
+        width: '70%',
+        display: 'flex',
+        justifyContent: 'center',
+        background: 'linear-gradient(to right, #000000, #FFFFFF)', /* Cambia estos valores de color según tus preferencias */
+      }}>
+        <div style={{ width: '66.67%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <button onClick={togglePlay} style={{ backgroundColor: 'transparent', border: 'none' }}>
+            {isPlaying ? <PauseIcon fontSize="large" /> : <PlayArrowIcon fontSize="large" />}
+          </button>
+          <div id="waveform" style={{ marginTop: '20px', width: '100%', height: '100px' }}></div>
+        </div>
+        <div style={{ width: '33.33%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          {selectedTrack && (
+            <Card>
+              <CardMedia
+                component="img"
+                height="300"
+                image={`${imageURL}/${selectedTrack.id}`}
+                alt="Imagen de portada"
+              />
+            </Card>
+          )}
+        </div>
+      </div>
+      <List style={{ width: '70%', overflowY: 'auto', maxHeight: 'calc(100vh - 500px)' }}>
+        {tracks.map(track => (
           <ListItem
             button
             key={track.id}
@@ -73,8 +105,8 @@ function AudioPlayerIs(props) {
       </List>
     </div>
   );
+  
+  
 }
 
 export default AudioPlayerIs;
-
-
