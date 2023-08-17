@@ -5,6 +5,8 @@ import { UsersPage } from "../pages/UsersPage"
 import { useSelector } from "react-redux"
 import AlbumPage from "../pages/albums/AlbumPage"
 import { Albumplay } from "../pages/albums/data/Albumplay"
+import { RegisterTracksPage } from "../pages/tracks/RegisterTracksPage"
+import TrackPage from "../pages/tracks/TrackPage"
 
 export const UserRoutes = () => {
     const { isAdmin } = useSelector(state => state.auth);
@@ -16,6 +18,8 @@ export const UserRoutes = () => {
                 <Route path="users/page/:page" element={<UsersPage />} />
                 <Route path="albums" element={<AlbumPage />} />
                 <Route path="albums/play/:id" element={<Albumplay />} />
+                <Route path="tracks/" element={<TrackPage />} />
+                <Route path="tracks/register" element={<RegisterTracksPage />} />
 
                 {!isAdmin || <>
                     <Route path="users/register" element={<RegisterPage />} />

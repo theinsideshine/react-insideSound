@@ -19,6 +19,18 @@ export const Navbar = () => {
                                 Albumes
                             </NavLink>
                         </li>
+
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="tracks/">
+                                Canciones
+                            </NavLink>
+                        </li>
+
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="tracks/register">
+                                Subir
+                            </NavLink>
+                        </li>
                         
                         {!login.isAdmin ||
                             <li className="nav-item">
