@@ -6,7 +6,7 @@ View albums list
 ![albums](images/album-demo.png)
 
 View tracks list
-![track](images/canciones.png)
+![track](images/track-list.png)
 
 View audioPlayerIs
 ![AudioPlayerIs](images/audioplayis.png)
