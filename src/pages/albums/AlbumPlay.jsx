@@ -10,6 +10,7 @@ import { Footer } from '../../components/layout/Footer';
 import { useAlbums } from '../../hooks/useAlbums';
 
 import AudioPlayerIs from '../../components/albums/AudioPlayerIs';
+import LoadingIndicator from '../../components/layout/LoadingIndicator';
 
 
 const defaultTheme = createTheme();
@@ -34,15 +35,10 @@ useEffect(() => {
 }, [albums]);
   
  
-  if (isLoading) {
-    return (
-        <div className="container my-4">
-            {/* <h4>Cargando ...</h4> */}
-            <div className="spinner-border text-info" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </div>
-        </div>
-    );
+if (isLoading) {
+  return (
+         <LoadingIndicator/>
+      );
 }
   
 
