@@ -7,7 +7,7 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://www.youtube.com/@educacionytecnologiaaplica2512">
+            <Link color="inherit" href="https://github.com/theinsideshine/react-insideSound">
                 TheInsideShine
             </Link>{' '}
             {new Date().getFullYear()}

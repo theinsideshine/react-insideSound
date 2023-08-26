@@ -17,6 +17,9 @@ View audioPlayerIs
 View trackEdit
 ![trackEdit](images/subir-track.png)
 
+View errors trackEdit
+![ErrorstrackEdit](images/errrors.png
+
 
 
 
