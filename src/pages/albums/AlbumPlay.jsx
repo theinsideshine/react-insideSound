@@ -6,15 +6,15 @@ import CardMedia from '@mui/material/CardMedia';
 import { useParams } from 'react-router-dom';
 import { CssBaseline, Grid, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Footer } from '../../../components/layout/Footer';
-import { useAlbums } from '../../../hooks/useAlbums';
+import { Footer } from '../../components/layout/Footer';
+import { useAlbums } from '../../hooks/useAlbums';
 
-import AudioPlayerIs from '../../../components/album/AudioPlayerIs';
+import AudioPlayerIs from '../../components/albums/AudioPlayerIs';
 
 
 const defaultTheme = createTheme();
 
-export const Albumplay = () => {
+export const AlbumPlay = () => {
 
   const { id } = useParams();
 
@@ -48,17 +48,12 @@ useEffect(() => {
 
 return (
   <ThemeProvider theme={defaultTheme}>
-    <CssBaseline />
-    <main
-      style={{
-        minHeight: '100vh',
-      }}
-    >
+    <CssBaseline />    
       <Box
         sx={{
           bgcolor: 'transparent',
-          pt: 8,
-          pb: 6,
+          pt: 4,
+          pb: 0,
         }}
       >
         {albums && albums.length > 0 ? (
@@ -76,9 +71,8 @@ return (
         ) : (
           <Typography variant="body1">No hay álbumes disponibles.</Typography>
         )}
-      </Box>
-    </main>
-    <Footer />
+      </Box>   
+ 
   </ThemeProvider>
 );
 }

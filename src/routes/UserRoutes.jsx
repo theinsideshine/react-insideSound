@@ -1,34 +1,43 @@
 import { Navigate, Route, Routes } from "react-router-dom"
 import { Navbar } from "../components/layout/Navbar"
-import { RegisterPage } from "../pages/RegisterPage"
-import { UsersPage } from "../pages/UsersPage"
+import { RegisterPage } from "../pages/users/RegisterPage"
+import { UsersPage } from "../pages/users/UsersPage"
 import { useSelector } from "react-redux"
 import AlbumPage from "../pages/albums/AlbumPage"
-import { Albumplay } from "../pages/albums/data/Albumplay"
-import { RegisterTracksPage } from "../pages/tracks/RegisterTracksPage"
+import { AlbumPlay } from "../pages/albums/AlbumPlay"
+
 import TrackPage from "../pages/tracks/TrackPage"
+import RegisterTrackPage from "../pages/tracks/RegisterTrackPage"
+import { Footer } from "../components/layout/Footer"
+
 
 export const UserRoutes = () => {
     const { isAdmin } = useSelector(state => state.auth);
     return (
-        <>
+        <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      
             <Navbar />
-            <Routes>
-                <Route path="users" element={<UsersPage />} />
-                <Route path="users/page/:page" element={<UsersPage />} />
-                <Route path="albums" element={<AlbumPage />} />
-                <Route path="albums/play/:id" element={<Albumplay />} />
-                <Route path="tracks/" element={<TrackPage />} />
-                <Route path="tracks/register" element={<RegisterTracksPage />} />
+            <div style={{ flex: 1,  marginBottom: "20px"  }}>
+                <Routes>
+                    <Route path="users" element={<UsersPage />} />
+                    <Route path="users/page/:page" element={<UsersPage />} />
+                    <Route path="albums" element={<AlbumPage />} />
+                    <Route path="albums/play/:id" element={<AlbumPlay />} />
+                    <Route path="tracks/" element={<TrackPage />} />
+                    <Route path="tracks/edit/:id" element={<RegisterTrackPage/>} />
+                    <Route path="tracks/register" element={<RegisterTrackPage/>} />
 
-                {!isAdmin || <>
-                    <Route path="users/register" element={<RegisterPage />} />
-                    <Route path="users/edit/:id" element={<RegisterPage />} />
-                </>
-                }
-                {/* <Route path="/" element={<Navigate to="/users" />} /> */}
-                <Route path="/" element={<Navigate to="/albums" />} />
-            </Routes>
-        </>
+                    {!isAdmin || <>
+                        
+                        <Route path="users/edit/:id" element={<RegisterPage />} />
+                    </>
+                    }
+                    {/* <Route path="/" element={<Navigate to="/users" />} /> */}
+                    <Route path="/" element={<Navigate to="/albums" />} />
+                </Routes>
+            </div>
+            <Footer />
+       </div>
+      
     )
 }

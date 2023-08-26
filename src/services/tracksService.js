@@ -1,22 +1,8 @@
 import tracksApi from "../apis/tracksApi";
-import { useAuth } from "../auth/hooks/useAuth";
-
 
 const BASE_URL = '';
 
-/* export const findAllId = async(id) => {
-    try {
-        const response = tracksApi.get(`${BASE_URL}/${id}`);
-        return response;
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
-} */
-
-
-
-export const findAllByAlbumId = async(id) => {
+export const serviceFindAllTrackByAlbumId = async(id) => {
     try {
         const response = tracksApi.get(`${BASE_URL}/by-album-id/${id}`);
         return response;
@@ -26,12 +12,40 @@ export const findAllByAlbumId = async(id) => {
     }
 }
 
-export const findAllByUser = async(username) => {
+export const serviceFindAllTrackByUser = async(username) => {
     try {
         const response = tracksApi.get(`${BASE_URL}/by-username/${username}`);
         return response;
     } catch (error) {
         console.error(error);
+        throw error;
+    }
+}
+
+export const serviceSaveTrack = async (formData) => {
+    
+    try {
+        return await tracksApi.post(BASE_URL, formData);
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const serviceUpdateTrack = async (formData) => {
+
+    const trackId = parseInt(formData.get('id'), 10); // Convert to number
+    
+    try {
+        return await tracksApi.put(`${BASE_URL}/${trackId}`, formData);
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const serviceRemoveTrack = async (id) => {
+    try {
+        await tracksApi.delete(`${BASE_URL}/${id}`);
+    } catch (error) {
         throw error;
     }
 }

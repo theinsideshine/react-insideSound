@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { UserModalForm } from "../components/UserModalForm";
-import { UsersList } from "../components/UsersList";
-import { useUsers } from "../hooks/useUsers";
-import { useAuth } from "../auth/hooks/useAuth";
-import { Paginator } from "../components/Paginator";
+import { UserModalForm } from "../../components/users/UserModalForm";
+import { UsersList } from "../../components/users/UsersList";
+import { useUsers } from "../../hooks/useUsers";
+import { useAuth } from "../../auth/hooks/useAuth";
+import { Paginator } from "../../components/users/Paginator";
 import { useParams } from "react-router-dom";
 
 export const UsersPage = () => {
@@ -14,7 +14,7 @@ export const UsersPage = () => {
         visibleForm,
         isLoading,
         paginator,
-        handlerOpenForm,
+        handlerOpenUserForm,
         getUsers,
     } = useUsers();
 
@@ -45,7 +45,7 @@ export const UsersPage = () => {
                     <div className="col">
                         {(visibleForm || !login.isAdmin) || <button
                             className="btn btn-primary my-2"
-                            onClick={handlerOpenForm}>
+                            onClick={handlerOpenUserForm}>
                             Nuevo Usuario
                         </button>}
 

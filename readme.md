@@ -2,17 +2,20 @@ InsideSound is an application to create albums with songs to listen to. The fron
 
 
 
-Demo albums list
+View albums list
 ![albums](images/album-demo.png)
 
 
-Demo tracks list
-![AudioPlayerIs](images/canciones.png)
+View tracks list
+![track](images/canciones.png)
 
 
-Demo audioPlayerIs
+View audioPlayerIs
 ![AudioPlayerIs](images/audioplayis.png)
 
+
+View trackEdit
+![trackEdit](images/subir-track.png)
 
 
 

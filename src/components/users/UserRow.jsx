@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
-import { useUsers } from "../hooks/useUsers";
-import { useAuth } from "../auth/hooks/useAuth";
+import { useUsers } from "../../hooks/useUsers";
+import { useAuth } from "../../auth/hooks/useAuth";
 
 export const UserRow = ({ id, username, email, admin }) => {
     const { handlerUserSelectedForm, handlerRemoveUser } = useUsers();

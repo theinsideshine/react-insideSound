@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
-import { UserForm } from "../../components/UserForm";
+import { UserForm } from "../../components/users/UserForm"
 import { useUsers } from "../../hooks/useUsers";
 
-
-export const RegisterTracksPage = () => {
+export const RegisterPage = () => {
 
     const { users = [], initialUserForm } = useUsers();
 

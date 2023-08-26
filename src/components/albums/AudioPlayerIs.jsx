@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import WaveSurfer from 'wavesurfer.js';
-import { findAllByAlbumId } from '../../services/tracksService';
+import { serviceFindAllTrackByAlbumId } from '../../services/tracksService';
 
 function AudioPlayerIs(props) {
   const [tracks, setTracks] = useState([]);
@@ -22,13 +22,13 @@ function AudioPlayerIs(props) {
   useEffect(() => {
     waveSurferRef.current = WaveSurfer.create({
       container: '#waveform',
-      waveColor: 'blue',
+      waveColor: '#2196f3',
       progressColor: 'gray',
       barWidth: 2,
       barHeight: 1,
     });
 
-    findAllByAlbumId(props.id)
+    serviceFindAllTrackByAlbumId(props.id)
       .then(response => {
         const data = response.data;
         setTracks(data);

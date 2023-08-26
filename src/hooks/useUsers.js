@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { findAllPages, remove, save, update } from "../services/userService";
+import { serviceFindAllPagesUser, serviceRemoveUser, serviceSaveUser, serviceUpdateUser } from "../services/userService";
 import { useDispatch, useSelector } from "react-redux";
-import { initialUserForm, addUser, removeUser, updateUser, loadingUsers, onUserSelectedForm, onOpenForm, onCloseForm, loadingError } from "../store/slices/users/usersSlice";
+import { initialUserForm, addUser, removeUser, updateUser, loadingUsers, onUserSelectedForm, onOpenUserForm, onCloseUserForm, loadingUserError } from "../store/slices/users/usersSlice";
 import { useAuth } from "../auth/hooks/useAuth";
 
 export const useUsers = () => {
@@ -17,7 +17,7 @@ export const useUsers = () => {
     const getUsers = async (page = 0) => {
 
         try {            
-            const result = await findAllPages(page);
+            const result = await serviceFindAllPagesUser(page);
             console.log(result);
             dispatch(loadingUsers(result.data));
         } catch (error) {
@@ -36,10 +36,10 @@ export const useUsers = () => {
         try {
 
             if (user.id === 0) {
-                response = await save(user);
+                response = await serviceSaveUser(user);
                 dispatch(addUser(response.data))
             } else {
-                response = await update(user);
+                response = await serviceUpdateUser(user);
                 dispatch(updateUser(response.data));
             }
 
@@ -52,19 +52,19 @@ export const useUsers = () => {
                     'El usuario ha sido actualizado con exito!',
                 'success'
             );
-            handlerCloseForm();
+            handlerCloseUserForm(); // Borra errores
             navigate('/users');
         } catch (error) {
             if (error.response && error.response.status == 400) {
-                dispatch(loadingError(error.response.data));
+                dispatch(loadingUserError(error.response.data));
             } else if (error.response && error.response.status == 500 &&
                 error.response.data?.message?.includes('constraint')) {
             
                 if (error.response.data?.message?.includes('UK_username')) {
-                    dispatch(loadingError({ username: 'El username ya existe!' }));
+                    dispatch(loadingUserError({ username: 'El username ya existe!' }));
                 }
                 if (error.response.data?.message?.includes('UK_email')) {
-                    dispatch(loadingError({ email: 'El email ya existe!' }));
+                    dispatch(loadingUserError({ email: 'El email ya existe!' }));
                 }
             } else if (error.response?.status == 401) {
                 handlerLogout();
@@ -91,7 +91,7 @@ export const useUsers = () => {
             if (result.isConfirmed) {
 
                 try {
-                    await remove(id);
+                    await serviceRemoveUser(id);
 
                     dispatch(removeUser(id));
 
@@ -114,13 +114,13 @@ export const useUsers = () => {
         dispatch(onUserSelectedForm({ ...user }));
     }
 
-    const handlerOpenForm = () => {
-        dispatch(onOpenForm());
+    const handlerOpenUserForm = () => {
+        dispatch(onOpenUserForm());
     }
 
-    const handlerCloseForm = () => {
-        dispatch(onCloseForm());
-        dispatch(loadingError({}));
+    const handlerCloseUserForm = () => {
+        dispatch(onCloseUserForm());
+        dispatch(loadingUserError({}));//Borra los errores
     }
     return {
         users,
@@ -133,8 +133,8 @@ export const useUsers = () => {
         handlerAddUser,
         handlerRemoveUser,
         handlerUserSelectedForm,
-        handlerOpenForm,
-        handlerCloseForm,
+        handlerOpenUserForm,
+        handlerCloseUserForm,
         getUsers,
     }
 }

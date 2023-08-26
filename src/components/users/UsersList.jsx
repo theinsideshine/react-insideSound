@@ -1,6 +1,6 @@
 import { UserRow } from "./UserRow"
-import { useUsers } from "../hooks/useUsers";
-import { useAuth } from "../auth/hooks/useAuth";
+import { useUsers } from "../../hooks/useUsers";
+import { useAuth } from "../../auth/hooks/useAuth";
 
 export const UsersList = () => {
 

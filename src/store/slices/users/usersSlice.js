@@ -7,7 +7,7 @@ export const initialUserForm = {
     email: '',
     admin: false,
 }
-const initialErrors = {
+const initialUserErrors = {
     username: '',
     password: '',
     email: '',
@@ -20,7 +20,7 @@ export const usersSlice = createSlice({
         paginator: {},
         userSelected: initialUserForm,
         visibleForm: false,
-        errors: initialErrors,
+        errors: initialUserErrors,
         isLoading: true,
     },
     reducers: {
@@ -58,15 +58,15 @@ export const usersSlice = createSlice({
             state.userSelected = payload;
             state.visibleForm = true;
         },
-        onOpenForm: (state) => {
+        onOpenUserForm: (state) => {
             state.visibleForm = true;
         },
-        onCloseForm: (state) => {
+        onCloseUserForm: (state) => {
             state.visibleForm = false;
             state.userSelected = initialUserForm;
 
         },
-        loadingError: (state, {payload}) => {
+        loadingUserError: (state, {payload}) => {
             state.errors = payload;
         }
     }
@@ -78,7 +78,7 @@ export const {
     updateUser,
     loadingUsers,
     onUserSelectedForm,
-    onOpenForm,
-    onCloseForm,
-    loadingError,
+    onOpenUserForm,
+    onCloseUserForm,
+    loadingUserError,
 } = usersSlice.actions;

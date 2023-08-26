@@ -39,3 +39,17 @@
         opacity: 1
     }
 }
+
+/* EditTrackPage */
+.gradient-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    width: 400px;
+    background: linear-gradient(to right, #000000, #FFFFFF);
+  }
+  
+
+  
+  

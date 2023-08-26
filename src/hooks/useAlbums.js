@@ -1,7 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+
 import { useDispatch, useSelector } from "react-redux";
-import AlbumData from "../pages/albums/data/AlbumData";
 import { loadingAlbums } from "../store/slices/albums/albumsSlice";
 import { findAll } from "../services/albumsService";
 

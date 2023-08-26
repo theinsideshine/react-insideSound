@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { IconButton, Menu, MenuItem } from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -7,41 +9,58 @@ import { useNavigate } from 'react-router-dom';
 import { Footer } from '../../components/layout/Footer.jsx';
 import { useTracks } from '../../hooks/useTracks.js';
 import { useAuth } from '../../auth/hooks/useAuth.js';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 const defaultTheme = createTheme();
 
+/*
+Tema claro (light): 
+Tema oscuro (dark):
+ */
+
+const theme = createTheme({
+  palette: {
+    mode: 'light', // Puede ser 'light' o 'dark'
+    // ...otros ajustes de color
+  },
+  // ...otros ajustes de estilo
+});
+
 export default function TrackPage() {
+
   const navigate = useNavigate();
   const imageURL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/img`;
   const mp3URL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/mp3`;
 
-  const { tracks, isLoading, getTracksUser } = useTracks();
+  const { tracks, isLoading, getTracksByUsername,handlerRemoveTrack} = useTracks();
+
   const { login } = useAuth();
 
   const [selectedTrack, setSelectedTrack] = useState(null);
-
   const [selectedTrackAudio, setSelectedTrackAudio] = useState(null);
+
 
   const handleTrackSelect = (trackId) => {
     setSelectedTrack(trackId === selectedTrack ? null : trackId);
     setSelectedTrackAudio(`${mp3URL}/${trackId}`); // Aquí asignamos la URL del archivo de audio
-  };
-  
+  };  
 
   const handleEdit = (trackId) => {
     // Handle edit logic here
+    console.log('En handle edit, id:',trackId);
+    navigate(`edit/${trackId}`);
   };
 
   const handleRemove = (trackId) => {
-    // Handle remove logic here
+    // Handle remove logic here}
+    console.log(trackId);
+    handlerRemoveTrack(trackId);
   };
-
   
 
   useEffect(() => {
-    getTracksUser(login.user.username); 
+    getTracksByUsername(login.user.username); 
   }, []);
 
   if (isLoading) {
@@ -56,17 +75,16 @@ export default function TrackPage() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <CssBaseline />
-      <main style={{ height: '100vh' }}>
+      <CssBaseline />      
         <Box
           sx={{
             bgcolor: 'transparent',
-            pt: 8,
-            pb: 6,
+            pt: 3,
+            pb: 1,
           }}
-        >
+        > 
           <Container>
-            <ul>
+            <ul style={{ marginBottom: "20px" }}>
             {tracks.map((track) => (
                     <li
                       key={track.id}
@@ -93,12 +111,23 @@ export default function TrackPage() {
                         )}
                         {track.title}
                       </div>
+                      
                       <div>
-                        <button onClick={() => handleEdit(track.id)}>
-                          <EditIcon style={{ color: selectedTrack === track.id ? 'blue' : 'black' }} />
+
+                        
+                        <button onClick={() => handleEdit(track.id)}
+                        style={{
+                          border: 'none', // Esto quitará el borde del botón
+                          background: 'transparent', // Esto hará que el fondo del botón sea transparente
+                        }}>
+                          <ModeEditOutlineOutlinedIcon style={{ color: selectedTrack === track.id ? '#2196f3' : 'black' }} />
                         </button>
-                        <button onClick={() => handleRemove(track.id)}>
-                          <DeleteIcon style={{ color: selectedTrack === track.id ? 'red' : 'black' }} />
+                        <button onClick={() => handleRemove(track.id)}
+                        style={{
+                          border: 'none', // Esto quitará el borde del botón
+                          background: 'transparent', // Esto hará que el fondo del botón sea transparente
+                        }}>
+                          <DeleteOutlineOutlinedIcon style={{ color: selectedTrack === track.id ? 'red' : 'black' }} />
                         </button>
                       </div>
                     </li>
@@ -106,9 +135,9 @@ export default function TrackPage() {
 
             </ul>
           </Container>
-        </Box>
-      </main>
-      <Footer />
+    </Box>
+      
+      
     </ThemeProvider>
   );
 }

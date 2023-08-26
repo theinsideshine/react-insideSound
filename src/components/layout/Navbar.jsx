@@ -1,65 +1,44 @@
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { AppBar, Toolbar, Button, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../auth/hooks/useAuth";
 
 export const Navbar = () => {
+  const { login, handlerLogout } = useAuth();
 
-    const { login, handlerLogout } = useAuth();
-    return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-bottom-dark">
-            <div className="container-fluid">
-                <a className="navbar-brand" href="#" style={{ color: 'blue', textDecoration: 'none' }}>InsideSound</a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/albums">
-                                Albumes
-                            </NavLink>
-                        </li>
-
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="tracks/">
-                                Canciones
-                            </NavLink>
-                        </li>
-
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="tracks/register">
-                                Subir
-                            </NavLink>
-                        </li>
-                        
-                        {!login.isAdmin ||
-                            <li className="nav-item">
-                                 <NavLink className="nav-link" to="/users">
-                                    Usuarios
-                                </NavLink>
-                            </li>
-                        }
-                        {!login.isAdmin ||
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/users/register">
-                                    Registrar Usuario
-                                </NavLink>
-                            </li>
-                        }
-                    </ul>
-                </div>
-
-                <div className="collapse navbar-collapse justify-content-end" id="navbarNavLogout">
-                    <span className="nav-item nav-link text-primary mx-3">
-                        {login.user?.username}
-                    </span>
-                    <button
-                        onClick={handlerLogout}
-                        className="btn btn-outline-success">
-                        Logout
-                    </button>
-                </div>
-            </div>
-        </nav>
-    );
-}
+  return (
+    <AppBar position="static" style={{ height: "55px" }}>
+      <Toolbar>
+        <div>
+          <Typography variant="h6" component={Link} to="/" color="inherit" style={{ textDecoration: "none" }}>
+            InsideSound
+          </Typography>
+          
+          <Button color="inherit" component={Link} to="/albums">
+            Albumes
+          </Button>
+          <Button color="inherit" component={Link} to="/tracks">
+            Canciones
+          </Button>
+          <Button color="inherit" component={Link} to="/tracks/register">
+            Subir
+          </Button>
+          {login.isAdmin && (
+            <Button color="inherit" component={Link} to="/users">
+              Usuarios
+            </Button>
+          )}
+        </div>
+        
+        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
+          <Typography variant="body1" color="inherit" style={{ marginRight: "10px" }}>
+            {login.user?.username}
+          </Typography>
+          <Button color="inherit" onClick={handlerLogout}>
+            Logout
+          </Button>
+        </div>
+      </Toolbar>
+    </AppBar>
+  );
+};
