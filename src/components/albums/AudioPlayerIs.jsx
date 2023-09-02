@@ -31,6 +31,7 @@ function AudioPlayerIs(props) {
     serviceFindAllTrackByAlbumId(props.id)
       .then(response => {
         const data = response.data;
+        console.log('data es:',data);
         setTracks(data);
         setSelectedTrack(data[0]);
       })
@@ -65,7 +66,9 @@ function AudioPlayerIs(props) {
   };
 
   return (
+    
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      
       <div style={{
         width: '70%',
         display: 'flex',
@@ -78,6 +81,7 @@ function AudioPlayerIs(props) {
           </button>
           <div id="waveform" style={{ marginTop: '20px', width: '100%', height: '100px' }}></div>
         </div>
+
         <div style={{ width: '33.33%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           {selectedTrack && (
             <Card>
@@ -90,18 +94,25 @@ function AudioPlayerIs(props) {
             </Card>
           )}
         </div>
+
       </div>
       <List style={{ width: '70%', overflowY: 'auto', maxHeight: 'calc(100vh - 500px)' }}>
-        {tracks.map(track => (
-          <ListItem
-            button
-            key={track.id}
-            onClick={() => handleTrackSelect(track)}
-            selected={selectedTrack && selectedTrack.id === track.id}
-          >
-            <ListItemText primary={track.title} />
-          </ListItem>
-        ))}
+      {tracks.length === 0 ? (
+            <ListItem>
+              <ListItemText primary="No hay canciones" />
+            </ListItem>
+          ) : (
+            tracks.map(track => (
+              <ListItem
+                button
+                key={track.id}
+                onClick={() => handleTrackSelect(track)}
+                selected={selectedTrack && selectedTrack.id === track.id}
+              >
+                <ListItemText primary={track.title} />
+              </ListItem>
+            ))
+          )}
       </List>
     </div>
   );

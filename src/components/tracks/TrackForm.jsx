@@ -163,7 +163,7 @@ export const TrackForm = ({ trackSelected }) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Title"
+              label="Titulo"
               value={title}
               onChange={handleTitleChange}
               fullWidth
@@ -211,7 +211,8 @@ export const TrackForm = ({ trackSelected }) => {
                 style={{marginTop: '10px' }}
                 onClick={handleSave}
                 >
-          { trackSelected.id > 0 ? 'Guardar' : 'Crear'}
+          { trackSelected.id > 0 ? 'Guardar ' : 'Crear '}
+          Track
         </Button>
       </form> 
     </Container>

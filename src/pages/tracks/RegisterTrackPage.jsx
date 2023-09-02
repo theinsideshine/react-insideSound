@@ -1,12 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Container, TextField, Button, Grid, Card, CardMedia } from '@mui/material';
 
 import '../../styles.css';
 import { useTracks } from '../../hooks/useTracks';
 import { TrackForm } from '../../components/tracks/TrackForm';
 import { useParams } from 'react-router-dom';
-import tracksApi from '../../apis/tracksApi';
-
+;
 
 export default function RegisterTrackPage() {
 

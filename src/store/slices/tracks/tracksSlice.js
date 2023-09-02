@@ -26,8 +26,7 @@ export const tracksSlice = createSlice({
         isLoading: true,
     },
     reducers: {
-        loadingTracks: (state, { payload }) => {
-            // console.log('payload='+payload);
+        loadingTracks: (state, { payload }) => {            
             state.tracks = payload;            
             state.isLoading = false;
         },
@@ -45,7 +44,7 @@ export const tracksSlice = createSlice({
             state.tracks = state.tracks.filter(track => track.id !== action.payload);
         },
         updateTrack: (state, action) => {
-            state.users = state.tracks.map(t => {
+            state.tracks = state.tracks.map(t => {
                 if (t.id === action.payload.id) {
                     return {
                         ...action.payload,

@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { IconButton, Menu, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { IconButton, Menu, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { Footer } from '../../components/layout/Footer.jsx';
 import { useTracks } from '../../hooks/useTracks.js';
 import { useAuth } from '../../auth/hooks/useAuth.js';
-import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LoadingIndicator from '../../components/layout/LoadingIndicator.jsx';
@@ -61,8 +58,9 @@ export default function TrackPage() {
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Box sx={{ bgcolor: 'transparent', pt: 3, pb: 1 }}>
-        <Container>
-          <TableContainer component={Paper}>
+      {tracks && tracks.length > 0 ?
+        (<Container>
+        <TableContainer component={Paper}>
             <Table>
               <TableHead>
                 <TableRow>
@@ -108,6 +106,10 @@ export default function TrackPage() {
             </Table>
           </TableContainer>
         </Container>
+        ): (
+          <Typography variant="body1">No hay canciones disponibles.</Typography>
+        )
+       }
       </Box>
     </ThemeProvider>
   );

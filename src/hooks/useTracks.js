@@ -48,14 +48,25 @@ export const useTracks = () => {
                     'El Track ha sido actualizado con exito!',
                 'success'
             );     
-            handlerCloseUserTrack(); //Borra errores       
+            handlerCloseTrack(); //Borra errores       
             navigate('/tracks');
-            } catch (error) {           
+            } catch (error) {            
                 
                 if (error.response && error.response.status == 400) {
                     console.log(error.response.data);
                    dispatch(loadingTrackError(error.response.data));
-                }  else {
+                }
+                /*
+                    * Una forma de trapear el error de title duplicado es saber el identificardor del campo en la BBDD 
+                    */
+                else if (error.response && error.response.status == 500 &&  error.response.data?.message?.includes('constraint')) {
+
+                    if (error.response.data?.message?.includes('UK_tracktitle')) { 
+                        dispatch(loadingTrackError({ title: 'El Track ya existe!' }));
+                    }
+                }           
+                
+                else {
                     throw error;
                 }
             }       
@@ -94,7 +105,7 @@ export const useTracks = () => {
         }
     })    
 }
-    const handlerCloseUserTrack = () => {
+    const handlerCloseTrack = () => {
     // dispatch(onCloseUserForm());
      dispatch(loadingTrackError({}));//Borra los errores
     }
@@ -107,6 +118,6 @@ export const useTracks = () => {
         getTracksByUsername,
         handlerAddTrack,
         handlerRemoveTrack,
-        handlerCloseUserTrack,
+        handlerCloseTrack,
     }
 }

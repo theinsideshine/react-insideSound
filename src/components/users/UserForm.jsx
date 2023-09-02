@@ -26,10 +26,12 @@ export const UserForm = ({ userSelected, handlerCloseForm }) => {
     }
 
     const onCheckboxChange = () => {
-        setChecked(!checked);
+
+        const newAdmin = !admin;
+        setChecked(newAdmin);
         setUserForm({
             ...userForm,
-            admin: checked,
+            admin: newAdmin,
         }
         );
     }

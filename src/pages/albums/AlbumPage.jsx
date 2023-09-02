@@ -16,16 +16,17 @@ import { useAlbums } from '../../hooks/useAlbums.js';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import LoadingIndicator from '../../components/layout/LoadingIndicator.jsx';
+
+import { useAuth } from '../../auth/hooks/useAuth.js';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { IconButton } from '@mui/material';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const defaultTheme = createTheme();
 
-const sliderSettings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3, // Puedes ajustar la cantidad de tarjetas que se muestran simultáneamente
-  slidesToScroll: 1,
-};
+
 
 
 const AlbumPage = () => {
@@ -33,20 +34,37 @@ const AlbumPage = () => {
 
   const imageURL = `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/albums/img`;
 
+  const { login } = useAuth();
+
   const {
     albums,
     isLoading,
-    getAlbums,
+    getAlbumsByUsername,
+    handlerRemoveAlbum,
   } = useAlbums();
 
   useEffect(() => {
-    getAlbums();
+    getAlbumsByUsername(login.user.username);
   }, []);
 
   const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
-  function handleClick(albumId) {
+  function handlePlayClick(albumId) {
     setSelectedAlbumId(albumId);
+  }
+
+
+  function handleEditClick(albumId) {
+    navigate(`/albums/edit/${albumId}`);    
+  }
+
+
+  function handleRemoveClick(albumId) {
+    handlerRemoveAlbum(albumId);
+    }
+
+  function handleCreateAlbum() {
+    navigate(`/albums/register/`);
   }
 
   useEffect(() => {
@@ -57,13 +75,20 @@ const AlbumPage = () => {
 
   const sliderSettings = {
     dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 2,
-  slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 1000,
+    infinite: false,    
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    autoPlay: false,
+    autoplaySpeed: 1000
   };
+
+  if (isLoading) {
+    return (
+           <LoadingIndicator/>
+        );
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -82,7 +107,7 @@ const AlbumPage = () => {
             spacing={2}
             justifyContent="center"
           >
-            <Button variant="contained">Crear album</Button>
+            <Button variant="contained" onClick={() => handleCreateAlbum()}>Crear album</Button>
           </Stack>
         </Container>
       </Box>
@@ -102,7 +127,15 @@ const AlbumPage = () => {
                           sx={{
                             pt: '56.25%',
                           }}
-                          image={`${imageURL}/${album.id}`}
+
+                          /* Al agregar ?${new Date().getTime()} a la URL de la imagen, 
+                          garantizas que el navegador solicitará la imagen nuevamente 
+                          desde el servidor cada vez que cargues la página, 
+                          lo que debería resolver el problema de que la imagen
+                           no se actualiza correctamente después de editar un álbum. */
+
+                          image={`${imageURL}/${album.id}?${new Date().getTime()}`}  // Aquí se agrega la cadena de consulta única
+  
                           onError={(e) => {
                             e.target.src = '/public/images/image-not-available.jpg';
                           }}
@@ -116,9 +149,18 @@ const AlbumPage = () => {
                           {album.artist}-{album.age}
                         </Typography>
                       </CardContent>
-                      <CardActions>
-                        <Button size="small" onClick={() => handleClick(album.id)}>Reproducir</Button>
-                        <Button size="small">Editar</Button>
+                      <CardActions>                       
+
+                        <IconButton onClick={() => handlePlayClick(album.id)}>
+                          <PlayArrowIcon/>
+                        </IconButton>
+                        <IconButton onClick={() => handleEditClick(album.id)}>
+                          <EditIcon/>
+                        </IconButton>
+                        <IconButton onClick={() => handleRemoveClick(album.id)}>
+                          <DeleteIcon/>
+                        </IconButton>
+                       
                       </CardActions>
                     </Card>
                   </div>
