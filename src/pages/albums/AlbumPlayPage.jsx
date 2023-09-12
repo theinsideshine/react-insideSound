@@ -1,25 +1,25 @@
 import {React, useEffect } from 'react'
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import CardMedia from '@mui/material/CardMedia';
+
 
 import { useParams } from 'react-router-dom';
-import { CssBaseline, Grid, Typography } from '@mui/material';
+import { CssBaseline, Grid, Typography, useMediaQuery } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Footer } from '../../components/layout/Footer';
-import { useAlbums } from '../../hooks/useAlbums';
 
 import AudioPlayerIs from '../../components/albums/AudioPlayerIs';
-import LoadingIndicator from '../../components/layout/LoadingIndicator';
+import AudioPlayerIsMobile from '../../components/albums/AudioPlayerIsMobile';
 
 
 const defaultTheme = createTheme();
 
 export const AlbumPlayPage = () => {
 
+  const isMobile = useMediaQuery('(max-width: 600px)');
+
   const { id } = useParams();
 
-  const {
+ /*  const {
     albums,    
     isLoading,    
     getAlbumsByUsername,
@@ -32,7 +32,7 @@ export const AlbumPlayPage = () => {
 }, []);
 
 useEffect(() => {
-}, [albums]);
+}, [albums]); 
   
  
 if (isLoading) {
@@ -40,7 +40,7 @@ if (isLoading) {
          <LoadingIndicator/>
       );
 }
-  
+  */
 
 return (
   <ThemeProvider theme={defaultTheme}>
@@ -52,13 +52,17 @@ return (
           pb: 0,
         }}
       >
-        {albums && albums.length > 0 ? (
+        {id > 0 ? (
           <Container>
             <Grid container spacing={1}> {/* Agregamos el container de Material-UI */}
              
               <Grid item xs={12}> {/* Componente AudioPlayerIs ocupando 10 columnas */}
-                <div>
-                  <AudioPlayerIs id={id} />
+              <div>
+                  {isMobile ? (
+                    <AudioPlayerIsMobile id={id} />
+                  ) : (
+                    <AudioPlayerIs id={id} />
+                  )}
                 </div>
               </Grid>
               

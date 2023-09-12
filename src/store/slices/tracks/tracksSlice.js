@@ -21,7 +21,8 @@ export const tracksSlice = createSlice({
     name: 'tracks',
     initialState: {
         tracks: [], 
-        trackSelected: initialTrackForm,        
+        trackSelected: initialTrackForm,   
+        visibleModalForm: false,     
         errors: initialTrackErrors,               
         isLoading: true,
     },
@@ -54,6 +55,16 @@ export const tracksSlice = createSlice({
             });
             state.trackSelected = initialTrackForm;            
         },
+        onTrackSelectedModalForm: (state, { payload }) => {
+            state.trackSelected = payload;
+            state.visibleModalForm = true;
+        },
+        onOpenTrackModalForm: (state) => {
+            state.visibleModalForm = true;
+        },
+        onCloseTrackModalForm: (state) => {
+            state.visibleModalForm = false;          
+        },
         loadingTrackError: (state, {payload}) => {
             state.errors = payload;
         },
@@ -61,4 +72,12 @@ export const tracksSlice = createSlice({
     }
 });
 
-export const { loadingTracks, addTrack, loadingTrackError, removeTrack, updateTrack } = tracksSlice.actions;
+export const { 
+    loadingTracks,
+    addTrack,
+    loadingTrackError,
+    removeTrack,
+    updateTrack,
+    onTrackSelectedModalForm,
+    onOpenTrackModalForm,
+    onCloseTrackModalForm } = tracksSlice.actions;

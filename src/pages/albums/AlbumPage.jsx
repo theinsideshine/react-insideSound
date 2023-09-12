@@ -26,16 +26,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const defaultTheme = createTheme();
 
-
-
-
 const AlbumPage = () => {
   const navigate = useNavigate();
-
   const imageURL = `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/albums/img`;
-
   const { login } = useAuth();
-
   const {
     albums,
     isLoading,
@@ -50,44 +44,39 @@ const AlbumPage = () => {
   const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
   function handlePlayClick(albumId) {
-    setSelectedAlbumId(albumId);
+    navigate(`/albums/play/${albumId}`);
   }
-
 
   function handleEditClick(albumId) {
-    navigate(`/albums/edit/${albumId}`);    
+    navigate(`/albums/edit/${albumId}`);
   }
-
 
   function handleRemoveClick(albumId) {
     handlerRemoveAlbum(albumId);
-    }
+  }
 
   function handleCreateAlbum() {
     navigate(`/albums/register/`);
   }
 
-  useEffect(() => {
-    if (selectedAlbumId !== null) {
-      navigate(`/albums/play/${selectedAlbumId}`);
-    }
-  }, [selectedAlbumId, navigate]);
-
   const sliderSettings = {
     dots: true,
-    infinite: false,    
+    infinite: false,
     speed: 500,
-    slidesToShow: 3,
     slidesToScroll: 1,
     swipeToSlide: true,
     autoPlay: false,
-    autoplaySpeed: 1000
+    autoplaySpeed: 1000,
   };
 
+  // Determina el número de slides a mostrar en función del ancho de la pantalla
+  let slidesToShow = 3;
+  if (window.innerWidth <= 768) {
+    slidesToShow = 1; // En pantallas más pequeñas, muestra solo 1 slide
+  }
+
   if (isLoading) {
-    return (
-           <LoadingIndicator/>
-        );
+    return <LoadingIndicator />;
   }
 
   return (
@@ -107,70 +96,58 @@ const AlbumPage = () => {
             spacing={2}
             justifyContent="center"
           >
-            <Button variant="contained" onClick={() => handleCreateAlbum()}>Crear album</Button>
+            <Button variant="contained" onClick={() => handleCreateAlbum()}>
+              Crear álbum
+            </Button>
           </Stack>
         </Container>
       </Box>
       <Container sx={{ py: 8 }} maxWidth="md">
-        
-          {albums && albums.length > 0 ?
-            (<Slider {...sliderSettings}>
-              { albums.map((album) =>
-                (
-                  <div key={album.id}>
-                    <Card
-                      sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                    >
-                      <div>
-                        <CardMedia
-                          component="div"
-                          sx={{
-                            pt: '56.25%',
-                          }}
-
-                          /* Al agregar ?${new Date().getTime()} a la URL de la imagen, 
-                          garantizas que el navegador solicitará la imagen nuevamente 
-                          desde el servidor cada vez que cargues la página, 
-                          lo que debería resolver el problema de que la imagen
-                           no se actualiza correctamente después de editar un álbum. */
-
-                          image={`${imageURL}/${album.id}?${new Date().getTime()}`}  // Aquí se agrega la cadena de consulta única
-  
-                          onError={(e) => {
-                            e.target.src = '/public/images/image-not-available.jpg';
-                          }}
-                        />
-                      </div>
-                      <CardContent sx={{ flexGrow: 1 }}>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          {album.title}
-                        </Typography>
-                        <Typography>
-                          {album.artist}-{album.age}
-                        </Typography>
-                      </CardContent>
-                      <CardActions>                       
-
-                        <IconButton onClick={() => handlePlayClick(album.id)}>
-                          <PlayArrowIcon/>
-                        </IconButton>
-                        <IconButton onClick={() => handleEditClick(album.id)}>
-                          <EditIcon/>
-                        </IconButton>
-                        <IconButton onClick={() => handleRemoveClick(album.id)}>
-                          <DeleteIcon/>
-                        </IconButton>
-                       
-                      </CardActions>
-                    </Card>
+        {albums && albums.length > 0 ? (
+          <Slider {...sliderSettings} slidesToShow={slidesToShow}>
+            {albums.map((album) => (
+              <div key={album.id}>
+                <Card
+                  sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+                >
+                  <div>
+                    <CardMedia
+                      component="div"
+                      sx={{
+                        pt: '56.25%',
+                      }}
+                      image={`${imageURL}/${album.id}?${new Date().getTime()}`}
+                      onError={(e) => {
+                        e.target.src = '/public/images/image-not-available.jpg';
+                      }}
+                    />
                   </div>
-                ))} 
-            </Slider>
-            ) : (
-              <Typography variant="body1">No hay álbumes disponibles.</Typography>
-            )
-         } 
-       
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {album.title}
+                    </Typography>
+                    <Typography>
+                      {album.artist}-{album.age}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <IconButton onClick={() => handlePlayClick(album.id)}>
+                      <PlayArrowIcon />
+                    </IconButton>
+                    <IconButton onClick={() => handleEditClick(album.id)}>
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={() => handleRemoveClick(album.id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </CardActions>
+                </Card>
+              </div>
+            ))}
+          </Slider>
+        ) : (
+          <Typography variant="body1">No hay álbumes disponibles.</Typography>
+        )}
       </Container>
     </ThemeProvider>
   );

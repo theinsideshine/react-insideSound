@@ -45,11 +45,39 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 400px;
-    width: 400px;
+    height: 300px;
+    width: 100%;
     background: linear-gradient(to right, #000000, #FFFFFF);
   }
   
 
+  /* Establece un ancho máximo para el diálogo modal */
+.custom-dialog {
+    max-width: none;
+  }
   
+/* En tu archivo CSS o en línea en tu componente */
+.volume-control {
+    /* Cambia el color de fondo y el color de la barra según tus preferencias */
+    background-color: #ff0000; /* Cambia a tu color deseado */
+    color: #ffffff; /* Cambia a tu color deseado */
+  }
+  
+  
+/* CSS en tu archivo de estilos */
+.selected {
+    background-color: linear-gradient(to right, #fff, #e0e0e0);
+    cursor: pointer;
+  }
+  
+  .audio-row {
+    display: none; /* Oculta la fila de audio por defecto */
+  }
+  
+  @media (min-width: 600px) {
+    /* Muestra la fila de audio en modo desktop */
+    .selected + .audio-row {
+      display: table-row;
+    }
+  }
   

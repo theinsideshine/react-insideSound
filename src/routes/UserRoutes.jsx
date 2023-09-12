@@ -12,14 +12,24 @@ import { Footer } from "../components/layout/Footer"
 import { AlbumPlayPage } from "../pages/albums/AlbumPlayPage"
 import RegisterAlbumPage from "../pages/albums/RegisterAlbumPage"
 
+import { useMediaQuery } from "@mui/material";
+
+
 
 export const UserRoutes = () => {
     const { isAdmin } = useSelector(state => state.auth);
+
+     // Utiliza el breakpoint "sm" de Material-UI
+  const isSmallScreen = useMediaQuery("(max-width: 600px)");
+
     return (
         <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       
             <Navbar />
-            <div style={{ flex: 1,  marginBottom: "20px"  }}>
+            <div style={{ flex: 1,
+                         marginBottom: "20px",
+                         padding: isSmallScreen ? "10px" : "20px", // Ajusta el espacio según el breakpoint          
+                         }}>
                 <Routes>
                     <Route path="users" element={<UsersPage />} />
                     <Route path="users/page/:page" element={<UsersPage />} />

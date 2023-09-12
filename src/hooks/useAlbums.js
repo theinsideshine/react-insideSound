@@ -55,8 +55,11 @@ export const useAlbums = () => {
                             if (error.response.data?.message?.includes('UK_albumtitle')) { 
                                 dispatch(loadingAlbumError({ title: 'El Album ya existe!' }));
                             }
-                    }                  
-                    else {
+                    }else if (error.response && error.response.status == 500 &&
+                        error.response.data?.message?.includes('Maximum upload size exceeded')) {
+                          dispatch(loadingTrackError({ title: 'Los archivos no puede superar lo 10Mbytes' }));
+                    }else {
+                        console.log(error);
                         throw error;
                     }
                 }       

@@ -12,6 +12,16 @@ export const serviceFindAllTrackByAlbumId = async(id) => {
     }
 }
 
+export const serviceFindAlbumIdByTrackId = async(trackId) => {
+    try {
+        const response = tracksApi.get(`${BASE_URL}/${trackId}/album`);
+        return response;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
 export const serviceFindAllTrackByUser = async(username) => {
     try {
         const response = tracksApi.get(`${BASE_URL}/by-username/${username}`);
@@ -46,6 +56,16 @@ export const serviceRemoveTrack = async (id) => {
     try {
         await tracksApi.delete(`${BASE_URL}/${id}`);
     } catch (error) {
+        throw error;
+    }    
+}
+
+export const serviceAssociateAlbumToTrack = async (trackId, albumId) => {
+    try {
+        const response = await tracksApi.post(`${BASE_URL}/${trackId}/associateAlbum?albumId=${albumId}`);
+        return response;
+    } catch (error) {
+        console.error(error);
         throw error;
     }
 }

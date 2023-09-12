@@ -8,22 +8,24 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
 import {UserRow} from "./UserRow"; // Make sure to import the UserRow component correctly
+import { useMediaQuery } from "@mui/material";
 
 export const UsersList = () => {
     const { users } = useUsers();
     const { login } = useAuth();
 
+     // Verificar si es una vista móvil
+     const isMobile = useMediaQuery('(max-width: 600px)');
+
     return (
         <TableContainer component={Paper}>
             <Table aria-label="Users Table">
                 <TableHead>
-                    <TableRow>
-                        <TableCell>#</TableCell>
+                    <TableRow>                        
                         <TableCell>username</TableCell>
-                        <TableCell>email</TableCell>
-                        <TableCell>admin</TableCell>
+                        {!isMobile && <TableCell>email</TableCell>}
+                        {!isMobile && <TableCell>admin</TableCell>}
                         {!login.isAdmin || (
                             <>
                                 <TableCell>update</TableCell>
@@ -40,6 +42,7 @@ export const UsersList = () => {
                             username={username}
                             email={email}
                             admin={admin}
+                            isMobile={isMobile}
                         />
                     ))}
                 </TableBody>

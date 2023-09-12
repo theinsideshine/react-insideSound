@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { loadingTracks, initialTrackForm, addTrack, loadingTrackError, removeTrack, updateTrack} from "../store/slices/tracks/tracksSlice";
+import { loadingTracks, initialTrackForm, addTrack, loadingTrackError, removeTrack, updateTrack, onTrackSelectedModalForm, onOpenTrackModalForm, onCloseTrackModalForm} from "../store/slices/tracks/tracksSlice";
 import { serviceFindAllTrackByUser, serviceRemoveTrack, serviceSaveTrack, serviceUpdateTrack } from "../services/tracksService";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export const useTracks = () => {   
 
 
-    const { tracks, trackSelected, errors ,isLoading } = useSelector(state => state.tracks);
+    const { tracks, trackSelected, errors ,isLoading,visibleModalForm } = useSelector(state => state.tracks);
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
@@ -63,10 +63,13 @@ export const useTracks = () => {
 
                     if (error.response.data?.message?.includes('UK_tracktitle')) { 
                         dispatch(loadingTrackError({ title: 'El Track ya existe!' }));
-                    }
-                }           
-                
-                else {
+                    }                    
+                   
+                }else if (error.response && error.response.status == 500 &&
+                          error.response.data?.message?.includes('Maximum upload size exceeded')) {
+                            dispatch(loadingTrackError({ title: 'Los archivos no puede superar lo 10Mbytes' }));
+                }else {
+                    console.log(error.response.data)
                     throw error;
                 }
             }       
@@ -105,6 +108,19 @@ export const useTracks = () => {
         }
     })    
 }
+    const handlerTrackSelectedModalForm = (track) => {
+        dispatch(onTrackSelectedModalForm({ ...track }));
+    }
+
+    const handlerOpenTrackModalForm = () => {
+        dispatch(onOpenTrackModalForm());
+    }
+
+    const handlerCloseTrackModalForm = () => {
+        dispatch(onCloseTrackModalForm());
+        
+    }
+
     const handlerCloseTrack = () => {
     // dispatch(onCloseUserForm());
      dispatch(loadingTrackError({}));//Borra los errores
@@ -114,10 +130,14 @@ export const useTracks = () => {
         trackSelected,  
         initialTrackForm,
         errors,
+        visibleModalForm,
         isLoading,            
         getTracksByUsername,
         handlerAddTrack,
         handlerRemoveTrack,
         handlerCloseTrack,
+        handlerTrackSelectedModalForm,
+        handlerCloseTrackModalForm,
+        handlerOpenTrackModalForm
     }
 }

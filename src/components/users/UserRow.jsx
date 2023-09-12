@@ -7,16 +7,15 @@ import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export const UserRow = ({ id, username, email, admin }) => {
+export const UserRow = ({ id, username, email, admin , isMobile}) => {
     const { handlerUserSelectedForm, handlerRemoveUser } = useUsers();
     const { login } = useAuth();
 
     return (
-        <TableRow>
-            <TableCell>{id}</TableCell>
+        <TableRow>            
             <TableCell>{username}</TableCell>
-            <TableCell>{email}</TableCell>
-            <TableCell>{admin ? "Si" : "No"}</TableCell>
+            {!isMobile && <TableCell>{email}</TableCell>}
+            {!isMobile && <TableCell>{admin ? "Si" : "No"}</TableCell>}
 
             {!login.isAdmin || (
                 <>

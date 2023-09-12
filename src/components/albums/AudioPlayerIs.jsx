@@ -8,24 +8,40 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import WaveSurfer from 'wavesurfer.js';
 import { serviceFindAllTrackByAlbumId } from '../../services/tracksService';
+import '../../styles.css'
+import { useMediaQuery } from '@mui/material';
 
 function AudioPlayerIs(props) {
+
+  const isMobile = useMediaQuery('(max-width: 600px)'); // Define el punto de quiebre según tus necesidades 
   const [tracks, setTracks] = useState([]);
   const [selectedTrack, setSelectedTrack] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(1); // Valor inicial del volumen (1 es el volumen máximo)
+
 
   const imageURL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/img`;
   const mp3URL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/mp3`;
 
   const waveSurferRef = useRef(null);
 
+  const handleVolumeChange = (event) => {
+    const newVolume = parseFloat(event.target.value);
+    if (waveSurferRef.current) {
+      waveSurferRef.current.setVolume(newVolume);
+    }
+    setVolume(newVolume); // Actualiza el estado del volumen
+  };
+  
+
   useEffect(() => {
     waveSurferRef.current = WaveSurfer.create({
       container: '#waveform',
       waveColor: '#2196f3',
       progressColor: 'gray',
-      barWidth: 2,
-      barHeight: 1,
+      barWidth: 0.5,
+      barHeight: 0.8,
+      heigth:1,
     });
 
     serviceFindAllTrackByAlbumId(props.id)
@@ -69,6 +85,7 @@ function AudioPlayerIs(props) {
     
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       
+      
       <div style={{
         width: '70%',
         display: 'flex',
@@ -81,7 +98,7 @@ function AudioPlayerIs(props) {
           </button>
           <div id="waveform" style={{ marginTop: '20px', width: '100%', height: '100px' }}></div>
         </div>
-
+        {!isMobile && (
         <div style={{ width: '33.33%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           {selectedTrack && (
             <Card>
@@ -93,8 +110,20 @@ function AudioPlayerIs(props) {
               />
             </Card>
           )}
+          
+            
+          <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.1"
+              value={volume} // `volume` es el estado que almacenará el valor del volumen
+              
+              onChange={handleVolumeChange}
+              />
+          
         </div>
-
+        )}
       </div>
       <List style={{ width: '70%', overflowY: 'auto', maxHeight: 'calc(100vh - 500px)' }}>
       {tracks.length === 0 ? (
