@@ -31,7 +31,8 @@ View users crud Desktop
 
 
 View albums list Mobile
-![albumsPage](images/albumPageMobile.png)
+
+![](images/albumPageMobile.png)
 
 
 View NavBar Mobile
