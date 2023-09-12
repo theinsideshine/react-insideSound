@@ -36,31 +36,40 @@ View albums list Mobile
 
 
 View NavBar Mobile
-![NavBar](images/navbarMobile.png)
+
+![](images/navbarMobile.png)
 
 View album crud Mobile
-![AlbumCrud](images/crudAlbumsMobile.png)
+
+![](images/crudAlbumsMobile.png)
 
 View tracks list Mobile
-![track](images/trackListMobile.png)
+
+![](images/trackListMobile.png)
 
 add track to album Mobile
-![AddtracktoAlbum](images/addTrackMobile.png)
+
+![](images/addTrackMobile.png)
 
 View audioPlayerIs Mobile
-![AudioPlayerIs](images/AudioPlayerMobile.png)
+
+![](images/AudioPlayerMobile.png)
 
 View trackEdit Mobile
-![trackEdit](images/uploadTrackMobile.png)
+
+![](images/uploadTrackMobile.png)
 
 View errors trackEdit Mobile
-![ErrorstrackEdit](images/errorsMobile.png)
+
+![](images/errorsMobile.png)
 
 View users list Mobile
-![UserList](images/listUsersMobile.png)
+
+![](images/listUsersMobile.png)
 
 View users crud Mobile
-![UserCrud](images/crudUsersMobile.png)
+
+![](images/crudUsersMobile.png)
 
 
 
