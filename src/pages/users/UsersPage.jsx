@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import Alert from "@mui/material/Alert";
+import { CssBaseline } from "@mui/material";
+
 import { UserModalForm } from "../../components/users/UserModalForm";
 import { UsersList } from "../../components/users/UsersList";
 import { useUsers } from "../../hooks/useUsers";
 import { useAuth } from "../../auth/hooks/useAuth";
 import { Paginator } from "../../components/users/Paginator";
-import { useParams } from "react-router-dom";
-import CircularProgress from "@mui/material/CircularProgress";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import Alert from "@mui/material/Alert";
-import Typography from "@mui/material/Typography";
 import LoadingIndicator from "../../components/layout/LoadingIndicator";
 
 export const UsersPage = () => {
@@ -36,7 +37,7 @@ export const UsersPage = () => {
     }
 
     return (
-        <>
+        <>   <CssBaseline/>  {/* Para que tome el modo*/}
             {!visibleForm || <UserModalForm />}
             <Container maxWidth="md" sx={{ marginTop: 4 }}>
                

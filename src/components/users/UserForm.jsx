@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { useUsers } from "../../hooks/useUsers";
-
+import { Button } from "@mui/base";
+import { useTheme } from '@mui/material/styles'; // Importa useTheme
 export const UserForm = ({ userSelected, handlerCloseForm }) => {
 
     const { initialUserForm, handlerAddUser, errors } = useUsers();
+    const theme = useTheme(); // Obtiene el tema personalizado
     
     const [userForm, setUserForm] = useState(initialUserForm);
     const [checked, setChecked] = useState(userForm.admin);
@@ -48,6 +50,8 @@ export const UserForm = ({ userSelected, handlerCloseForm }) => {
         setUserForm(initialUserForm);
     }
     return (
+       
+      
         <form onSubmit={ onSubmit }>
             <input
                 className="form-control my-3 w-75"
@@ -88,19 +92,22 @@ export const UserForm = ({ userSelected, handlerCloseForm }) => {
                 name="id"
                 value={id} />
             
-            <button
-                className="btn btn-primary"
+            <Button
+                variant="contained" // Puedes ajustar el tipo de botón (contained, outlined, etc.)
+                style={{ color: theme.palette.primary.main }}
                 type="submit">
                 {id > 0 ? 'Editar' : 'Crear'}
-            </button>
+            </Button>
 
-            {!handlerCloseForm || <button
-                className="btn btn-primary mx-2"
-                type="button"
+            {!handlerCloseForm || <Button
+                
+                variant="contained" // Puedes ajustar el tipo de botón (contained, outlined, etc.)
+                style={{ color: theme.palette.primary.main }}
                 onClick={() => onCloseForm()}>
                 Cerrar
-            </button>}
+            </Button>}
             
         </form>
+        
     )
 }

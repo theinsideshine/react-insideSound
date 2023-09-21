@@ -5,9 +5,10 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid'; // Importa el componente Grid
+import '../../styles.css';
 
 import { serviceFindAllTrackByAlbumId } from '../../services/tracksService';
-import '../../styles.css';
+
 
 function AudioPlayerIsMobile(props) {
   const [tracks, setTracks] = useState([]);

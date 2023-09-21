@@ -8,8 +8,11 @@ import AddIcon from '@mui/icons-material/Add';
 import { useTracks } from "../../hooks/useTracks";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
+import { useTheme } from '@mui/material/styles'; // Importa useTheme
 
 export const TrackRow = ({ id, title }) => {
+
+  const theme = useTheme(); // Obtiene el tema personalizado
   const { handlerRemoveTrack, handlerTrackSelectedModalForm } = useTracks();
 
   const navigate = useNavigate();
@@ -57,19 +60,19 @@ export const TrackRow = ({ id, title }) => {
           <audio controls src={selectedTrackAudio} style={{ maxHeight: '30px', width: '300px', marginRight: '8px' }} />
         
            )}
-            <span style={{ marginLeft: '8px' }}>{title}</span>
+            <span style={{ marginLeft: '8px' }}>{title}</span>  
           </div>
         </TableCell>
 
         <TableCell>
           <IconButton onClick={() => handlerTrackSelectedModalForm({ id, title })}>
-            <AddIcon style={{ color: selectedTrack === id ? '#2196f3' : 'black',fontSize: isMobile ? 16 : 24  }} />
+            <AddIcon style={{ color: selectedTrack === id ? theme.palette.primary.main : theme.palette.secondary.main ,fontSize: isMobile ? 16 : 24  }} />
           </IconButton>
           <IconButton onClick={() => handleEdit(id)}>
-            <EditIcon style={{ color: selectedTrack === id ? '#2196f3' : 'black', fontSize: isMobile ? 16 : 24  }} />
+            <EditIcon style={{ color: selectedTrack === id ?  theme.palette.primary.main : theme.palette.secondary.main, fontSize: isMobile ? 16 : 24  }} />
           </IconButton>
           <IconButton onClick={() => handleRemove(id)}>
-            <DeleteIcon style={{ color: selectedTrack === id ? 'red' : 'black', fontSize: isMobile ? 16 : 24  }} />
+            <DeleteIcon style={{ color: selectedTrack === id ?  theme.palette.primary.main : theme.palette.secondary.main, fontSize: isMobile ? 16 : 24  }} />
           </IconButton>
         </TableCell>
       </TableRow>

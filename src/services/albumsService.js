@@ -13,6 +13,16 @@ export const serviceFindAllAlbumByUsername = async(username) => {
     }
 }
 
+export const serviceFindPublicAlbumsByUsername = async(username) => {
+    try {
+        const response = albumsApi.get(`${BASE_URL}/public/${username}`);
+        return response;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
 
 
 export const serviceFindAllAlbum = async() => {

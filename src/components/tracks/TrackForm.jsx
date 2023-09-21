@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useTracks } from "../../hooks/useTracks";
-import { Container, TextField, Button, Grid, Card, CardMedia } from '@mui/material';
+import { Container, TextField, Button, Grid, Card, CardMedia, CssBaseline } from '@mui/material';
 import { useAuth } from "../../auth/hooks/useAuth";
 import Alert from '@mui/material/Alert';
 
@@ -123,10 +123,11 @@ export const TrackForm = ({ trackSelected }) => {
   };
 
   return (
+       
     <Container maxWidth="md" sx={{ marginTop: '50px' }}>
-      
+      <CssBaseline />  {/* Para que tome el modo*/}
       <form>
-        <Grid container spacing={2}>
+        <Grid container >
           <Grid item xs={12} sm={6}>
             {imagePreviewUrl ? (
               <Card >
@@ -136,7 +137,7 @@ export const TrackForm = ({ trackSelected }) => {
                 </Button>
               </Card>
             ) : (
-              <Card className="gradient-card">
+              <Card className="gradient-card" >
                 <input
                   type="file"
                   accept="image/*"
@@ -217,6 +218,7 @@ export const TrackForm = ({ trackSelected }) => {
         </Button>
       </form> 
     </Container>
+    
   );
 }
 

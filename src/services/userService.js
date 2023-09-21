@@ -22,6 +22,17 @@ export const serviceFindAllPagesUser = async (page = 0) => {
     }
 }
 
+export const serviceFindAllUsernames = async () => {
+    try {
+      const response = await usersApi.get(`${BASE_URL}/usernames`);
+      console.log('usernames: ',response.data)
+      return response.data; // Devuelve la lista de nombres de usuario
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
 export const serviceSaveUser = async ({ username, email, password, admin }) => {
     try {
         return await usersApi.post(BASE_URL, {

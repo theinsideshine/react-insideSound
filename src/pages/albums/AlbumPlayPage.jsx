@@ -1,49 +1,20 @@
 import {React, useEffect } from 'react'
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-
-
 import { useParams } from 'react-router-dom';
 import { CssBaseline, Grid, Typography, useMediaQuery } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 import AudioPlayerIs from '../../components/albums/AudioPlayerIs';
 import AudioPlayerIsMobile from '../../components/albums/AudioPlayerIsMobile';
 
-
-const defaultTheme = createTheme();
 
 export const AlbumPlayPage = () => {
 
   const isMobile = useMediaQuery('(max-width: 600px)');
 
-  const { id } = useParams();
-
- /*  const {
-    albums,    
-    isLoading,    
-    getAlbumsByUsername,
-} = useAlbums();
-
-
- 
- useEffect(() => {
-  getAlbumsByUsername();
-}, []);
-
-useEffect(() => {
-}, [albums]); 
-  
- 
-if (isLoading) {
-  return (
-         <LoadingIndicator/>
-      );
-}
-  */
+  const { id } = useParams(); 
 
 return (
-  <ThemeProvider theme={defaultTheme}>
+     <>
     <CssBaseline />    
       <Box
         sx={{
@@ -72,7 +43,7 @@ return (
           <Typography variant="body1">No hay canciones disponibles.</Typography>
         )}
       </Box>   
+      </>
  
-  </ThemeProvider>
 );
 }

@@ -6,13 +6,33 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
+import { CssBaseline, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles'; // Importa useTheme
+import { styled } from '@mui/system';
+import '../../styles.css'; 
+
 import WaveSurfer from 'wavesurfer.js';
 import { serviceFindAllTrackByAlbumId } from '../../services/tracksService';
-import '../../styles.css'
-import { useMediaQuery } from '@mui/material';
+
+
+/* const VolumeSlider = styled('input')(({ theme }) => ({
+  
+  background: `linear-gradient(to right, ${theme.palette.primary.main}, yellow)`,
+  
+  '&::-webkit-slider-thumb': {
+    background: theme.palette.primary.main,
+  },
+  '&::-moz-range-thumb': {
+    background: theme.palette.primary.main,
+  },
+  '&::-ms-thumb': {
+    background: theme.palette.primary.main,
+  },
+})); */
 
 function AudioPlayerIs(props) {
 
+  const theme = useTheme(); // Obtiene el tema personalizado
   const isMobile = useMediaQuery('(max-width: 600px)'); // Define el punto de quiebre según tus necesidades 
   const [tracks, setTracks] = useState([]);
   const [selectedTrack, setSelectedTrack] = useState(null);
@@ -37,7 +57,7 @@ function AudioPlayerIs(props) {
   useEffect(() => {
     waveSurferRef.current = WaveSurfer.create({
       container: '#waveform',
-      waveColor: '#2196f3',
+      waveColor: theme.palette.primary.main,
       progressColor: 'gray',
       barWidth: 0.5,
       barHeight: 0.8,
@@ -83,8 +103,7 @@ function AudioPlayerIs(props) {
 
   return (
     
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>      
       
       <div style={{
         width: '70%',
@@ -111,6 +130,15 @@ function AudioPlayerIs(props) {
             </Card>
           )}
           
+          {/* <VolumeSlider
+              type="range"
+              min="0"
+              max="1"
+              step="0.1"
+              value={volume}
+              onChange={handleVolumeChange}
+              theme={theme}
+            /> */}
             
           <input
               type="range"
@@ -118,7 +146,7 @@ function AudioPlayerIs(props) {
               max="1"
               step="0.1"
               value={volume} // `volume` es el estado que almacenará el valor del volumen
-              
+              style={{ color: '#b58d67 !important'}}     //NO funciona         
               onChange={handleVolumeChange}
               />
           

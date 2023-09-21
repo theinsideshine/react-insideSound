@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import '../../styles.css';
 import { useTracks } from '../../hooks/useTracks';
 import { TrackForm } from '../../components/tracks/TrackForm';
-import { useParams } from 'react-router-dom';
-;
 
 export default function RegisterTrackPage() {
 

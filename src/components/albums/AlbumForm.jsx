@@ -1,17 +1,17 @@
 import { useEffect,  useState } from "react"
 
-import { Container, TextField, Button, Grid, Card, CardMedia } from '@mui/material';
-import { useAuth } from "../../auth/hooks/useAuth";
+import { Container, TextField, Button, Grid, Card, CardMedia, CssBaseline } from '@mui/material';
+import { FormControl, FormControlLabel, Checkbox } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import '../../styles.css';
+
 import { useAlbums } from "../../hooks/useAlbums";
-import { FormControl, FormControlLabel, Checkbox } from '@mui/material';
+import { useAuth } from "../../auth/hooks/useAuth";
+
 
 export const AlbumForm = ({ albumSelected }) => {
 
   const UpLoadImageURL = `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/albums/img`;
-
-
 
     const { initialAlbumForm, errors, handlerAddAlbum} = useAlbums();
 
@@ -20,15 +20,11 @@ export const AlbumForm = ({ albumSelected }) => {
     const [albumForm, setAlbumForm] = useState(initialAlbumForm); 
     const [checked, setChecked] = useState(albumForm.albumprivate);     
     
-    const { id, username, title, artist, age, albumprivate, imageURL } = albumForm;  
-
-   
+    const { id, username, title, artist, age, albumprivate, imageURL } = albumForm;    
   
   const [imageFile, setImageFile] = useState(null);
  
-
-  const [imagePreviewUrl, setImagePreviewUrl] = useState('');
- 
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(''); 
 
   useEffect(() => {
     if (albumSelected && albumSelected.id !== 0) {
@@ -56,9 +52,7 @@ export const AlbumForm = ({ albumSelected }) => {
       // Fetch audio file
       
     }
-  }, [albumSelected]);
-
- 
+  }, [albumSelected]); 
 
   const handleInputChange = (event, fieldName) => {
     setAlbumForm({
@@ -76,7 +70,6 @@ export const AlbumForm = ({ albumSelected }) => {
     });
 };
 
-
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setImageFile(file);
@@ -86,16 +79,12 @@ export const AlbumForm = ({ albumSelected }) => {
         ...albumForm,
         imageURL: URL.createObjectURL(file),
     })
-  };
-
-  
+  };  
 
   const handleRemoveImage = () => {
     setImageFile(null);
     setImagePreviewUrl('');
-  };
-
-  
+  };  
 
   const handleSave = () => {
     const formData = new FormData();
@@ -112,7 +101,7 @@ export const AlbumForm = ({ albumSelected }) => {
 
   return (
     <Container maxWidth="md" sx={{ marginTop: '50px' }}>
-      
+      <CssBaseline />  {/* Para que tome el modo*/}
       <form>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>

@@ -9,8 +9,8 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
+import { createTheme} from '@mui/material/styles';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAlbums } from '../../hooks/useAlbums.js';
 
 import "slick-carousel/slick/slick.css";
@@ -24,27 +24,43 @@ import { IconButton } from '@mui/material';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const defaultTheme = createTheme();
+import { useTheme } from '@mui/material/styles'; // Importa useTheme
 
-const AlbumPage = () => {
+const AlbumPage = ({usernameNoAuth}) => {
+
+  const theme = useTheme(); // Obtiene el tema personalizado
   const navigate = useNavigate();
   const imageURL = `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/albums/img`;
   const { login } = useAuth();
+ 
   const {
     albums,
     isLoading,
     getAlbumsByUsername,
+    getPublicAlbumsByUsername,
     handlerRemoveAlbum,
   } = useAlbums();
 
   useEffect(() => {
-    getAlbumsByUsername(login.user.username);
-  }, []);
+    if(login.isAuth){
+      getAlbumsByUsername(login.user.username);
+    }else {
+      getPublicAlbumsByUsername(usernameNoAuth);
+    }
+    
+  }, [login.isAuth,usernameNoAuth]);
+
+  
 
   const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
   function handlePlayClick(albumId) {
-    navigate(`/albums/play/${albumId}`);
+    if(login.isAuth){
+      navigate(`/albums/play/${albumId}`);
+    }else {
+      navigate(`/albums/homeplay/${albumId}`);
+    }
+   
   }
 
   function handleEditClick(albumId) {
@@ -80,7 +96,7 @@ const AlbumPage = () => {
   }
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <>
       <CssBaseline />
       <Box
         sx={{
@@ -96,9 +112,11 @@ const AlbumPage = () => {
             spacing={2}
             justifyContent="center"
           >
+            {login.isAuth && (
             <Button variant="contained" onClick={() => handleCreateAlbum()}>
               Crear álbum
             </Button>
+            )}
           </Stack>
         </Container>
       </Box>
@@ -131,15 +149,21 @@ const AlbumPage = () => {
                     </Typography>
                   </CardContent>
                   <CardActions>
+                  
                     <IconButton onClick={() => handlePlayClick(album.id)}>
-                      <PlayArrowIcon />
+                      <PlayArrowIcon style={{ color: theme.palette.primary.main }} />
                     </IconButton>
+                  
+                  {login.isAuth && (
                     <IconButton onClick={() => handleEditClick(album.id)}>
-                      <EditIcon />
+                      <EditIcon style={{ color: theme.palette.primary.main }}/>
                     </IconButton>
+                    )}
+                    {login.isAuth && (
                     <IconButton onClick={() => handleRemoveClick(album.id)}>
-                      <DeleteIcon />
+                      <DeleteIcon style={{ color: theme.palette.primary.main }}/>
                     </IconButton>
+                    )}
                   </CardActions>
                 </Card>
               </div>
@@ -149,7 +173,7 @@ const AlbumPage = () => {
           <Typography variant="body1">No hay álbumes disponibles.</Typography>
         )}
       </Container>
-    </ThemeProvider>
+    </>
   );
 };
 

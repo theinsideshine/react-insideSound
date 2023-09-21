@@ -1,7 +1,7 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { loadingAlbums, initialAlbumForm, addAlbum, updateAlbum, removeAlbum, loadingAlbumError } from "../store/slices/albums/albumsSlice";
-import {  serviceFindAllAlbum, serviceFindAllAlbumByUsername, serviceRemoveAlbum, serviceSaveAlbum, serviceUpdateAlbum } from "../services/albumsService";
+import {  serviceFindAllAlbum, serviceFindAllAlbumByUsername, serviceFindPublicAlbumsByUsername, serviceRemoveAlbum, serviceSaveAlbum, serviceUpdateAlbum } from "../services/albumsService";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
@@ -89,6 +89,19 @@ export const useAlbums = () => {
         }
     }
 
+    const getPublicAlbumsByUsername =async(username) => {
+                   
+        try { 
+            //const result = AlbumData.album;            
+            const result = await serviceFindPublicAlbumsByUsername(username);
+            dispatch(loadingAlbums(result.data));
+        } catch (error) {
+            if (error.response?.status == 404) {
+                dispatch(loadingAlbums([])); //carga vacio para mostrar no quedarse en isloading=true
+            };
+        }
+    }
+
     const handlerRemoveAlbum = (id) => {
         // console.log(id);   
     
@@ -135,6 +148,7 @@ export const useAlbums = () => {
         isLoading,        
         getAlbums,
         getAlbumsByUsername,
+        getPublicAlbumsByUsername,
         handlerAddAlbum,
         handlerRemoveAlbum,
     }

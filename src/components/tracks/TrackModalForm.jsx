@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Dialog, DialogTitle, DialogContent, IconButton, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper, Checkbox } from "@mui/material";
 import { Close } from "@mui/icons-material";
-
 import { useTracks } from "../../hooks/useTracks";
 import { useAlbums } from "../../hooks/useAlbums";
 import { useAuth } from "../../auth/hooks/useAuth";
 import { serviceAssociateAlbumToTrack, serviceFindAlbumIdByTrackId } from "../../services/tracksService";
-
+import { Button } from "@mui/base";
+import { useTheme } from '@mui/material/styles'; // Importa useTheme
 export const TrackModalForm = () => {
 
   const { login } = useAuth();
 
   const imageURL = `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/albums/img`;
+  const theme = useTheme(); // Obtiene el tema personalizado
   
   const { trackSelected, handlerCloseTrackModalForm } = useTracks();
   const {
@@ -121,21 +122,23 @@ export const TrackModalForm = () => {
             </Table>
           </TableContainer>
           <div style={{ margin: "16px 0" }}>
-          <button className="btn btn-primary" 
-                   type="button"
-                   onClick={() => handlerSaveAlbumIdModalForm()}
-                   >
-            Guardar
-          </button>
+          <Button
+              variant="contained" // Puedes ajustar el tipo de botón (contained, outlined, etc.)
+              style={{ color: theme.palette.primary.main }}
+              onClick={() => handlerSaveAlbumIdModalForm()}
+            >
+              Guardar
+            </Button>
 
           {!handlerCloseTrackModalForm || (
-            <button
-              className="btn btn-primary mx-2"
-              type="button"
+            <Button
+            variant="contained" // Puedes ajustar el tipo de botón (contained, outlined, etc.)
+            style={{ color: theme.palette.primary.main }}
+              
               onClick={() => handlerCloseTrackModalForm()}
             >
               Cerrar
-            </button>
+              </Button>
           )}
 
             {!isSelectionValid && (

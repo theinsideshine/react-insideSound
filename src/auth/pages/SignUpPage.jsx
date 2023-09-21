@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme} from '@mui/material/styles';
 import { useUsers } from '../../hooks/useUsers';
 import { Copyright } from './FooterLogin';
 
@@ -46,7 +46,7 @@ export default function SignUp() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -123,15 +123,18 @@ export default function SignUp() {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/login" variant="body2">
-                  Already have an account? Sign in
+                  Tienes una cuenta? Entrar
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
+        <Link href="/" variant="body2">
+                    {"Volver"}
+         </Link>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
+    </>
   );
 }
 

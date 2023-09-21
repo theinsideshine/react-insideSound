@@ -6,8 +6,10 @@ import TableCell from "@mui/material/TableCell";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useTheme } from '@mui/material/styles'; // Importa useTheme
 
 export const UserRow = ({ id, username, email, admin , isMobile}) => {
+    const theme = useTheme(); // Obtiene el tema personalizado
     const { handlerUserSelectedForm, handlerRemoveUser } = useUsers();
     const { login } = useAuth();
 
@@ -22,7 +24,7 @@ export const UserRow = ({ id, username, email, admin , isMobile}) => {
                     <TableCell>
                         <IconButton
                             size="small"
-                            color="primary"
+                            style={{ color: theme.palette.primary.main }}
                             onClick={() =>
                                 handlerUserSelectedForm({
                                     id,
@@ -39,7 +41,7 @@ export const UserRow = ({ id, username, email, admin , isMobile}) => {
                     <TableCell>
                         <IconButton
                             size="small"
-                            color="error"
+                            style={{ color: theme.palette.primary.main }}
                             onClick={() => handlerRemoveUser(id)}
                         >
                             <DeleteIcon />
