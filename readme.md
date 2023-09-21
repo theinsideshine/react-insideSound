@@ -21,7 +21,7 @@ SignIn
 
 ![](images/signIn-dark.png)
 
-![](images/showAlbumPublic-mobile.png)
+![](images/signIn-mobile.png)
 
 
 SignUp
@@ -65,7 +65,7 @@ add track to album
 
 
 View audioPlayer
-![](images/audioPlayer.png)
+![](images/audioPlayerInside.png)
 
 ![](images/audioPlayer-dark.png)
 
@@ -100,6 +100,7 @@ View users edit
 ![](images/userEdit-dark.png)
 
 ![](images/editUser-mobile.png)
+
 
 
 NavbarMobile
