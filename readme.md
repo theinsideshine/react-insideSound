@@ -104,6 +104,8 @@ View users edit
 
 
 NavbarMobile
+
+
 ![](images/navbarMobile.png)
 
 ![](images/NavbarMobile-dark.png)
