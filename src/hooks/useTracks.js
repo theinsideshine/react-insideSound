@@ -50,7 +50,8 @@ export const useTracks = () => {
             );     
             handlerCloseTrack(); //Borra errores       
             navigate('/tracks');
-            } catch (error) {            
+            } catch (error) {      
+                console.log(error);      
                 
                 if (error.response && error.response.status == 400) {
                     console.log(error.response.data);

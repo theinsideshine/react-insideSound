@@ -6,6 +6,9 @@ InsideSound is an application to create albums with songs to listen to. The fron
 CustomHooks-Redux-Axios
 [![CustomsHooks](images/video-hooks.png)](https://www.youtube.com/watch?v=Z2xHULXZpxk)
 
+ErrorSystem
+[![ErrorSystem](images/video-errors.png)](https://youtu.be/BDVQ2RtpvLg)
+
 
 Home Page 
 ![](images/homePage.png)

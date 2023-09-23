@@ -55,6 +55,7 @@ export const useUsers = () => {
             handlerCloseUserForm(); // Borra errores
             navigate('/users');
         } catch (error) {
+            console.log(error);
             if (error.response && error.response.status == 400) {
                 dispatch(loadingUserError(error.response.data));
             } else if (error.response && error.response.status == 500 &&
