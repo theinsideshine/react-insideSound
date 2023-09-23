@@ -1,5 +1,12 @@
 InsideSound is an application to create albums with songs to listen to. The frontend is in react and in the backend an ecosystem of microservices with springCloud. This project is under construction
 
+
+
+
+CustomHooks-Redux-Axios
+[![CustomsHooks](images/video-hooks.png)](https://www.youtube.com/watch?v=Z2xHULXZpxk)
+
+
 Home Page 
 ![](images/homePage.png)
 
@@ -109,6 +116,9 @@ NavbarMobile
 ![](images/navbarMobile.png)
 
 ![](images/NavbarMobile-dark.png)
+
+
+
 
 
 Backend repository: https://github.com/theinsideshine/springcloud-insidesound
