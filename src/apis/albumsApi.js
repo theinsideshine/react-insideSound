@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const albumsApi = axios.create({
-    baseURL: `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/albums`
+    baseURL: `${import.meta.env.VITE_API_MSVC_ALBUM_URL}`
 });
 
 albumsApi.interceptors.request.use(config => {

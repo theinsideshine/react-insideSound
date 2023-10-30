@@ -5,9 +5,9 @@ import './styles.css'
 import { SoundApp } from './soundApp'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
         <SoundApp />
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 )

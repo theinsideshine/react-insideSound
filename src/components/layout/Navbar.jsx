@@ -86,6 +86,7 @@ export const Navbar = () => {
     async function loadUsernames() {
       try {
         const usernamesResponse = await serviceFindAllUsernames();
+        
         setUsernames(usernamesResponse);
       } catch (error) {
         console.error("Error al cargar los nombres de usuario:", error);

@@ -65,10 +65,15 @@ export const useAlbums = () => {
                 }       
       }
 
+
+      /*
+      *  Es uso al principio ahora no se usa
+      */
+
     const getAlbums =async() => {
                    
         try { 
-            //const result = AlbumData.album;            
+                      
             const result = await serviceFindAllAlbum();
             dispatch(loadingAlbums(result.data));
         } catch (error) {
@@ -92,7 +97,7 @@ export const useAlbums = () => {
     const getPublicAlbumsByUsername =async(username) => {
                    
         try { 
-            //const result = AlbumData.album;            
+                        
             const result = await serviceFindPublicAlbumsByUsername(username);
             dispatch(loadingAlbums(result.data));
         } catch (error) {
@@ -104,7 +109,7 @@ export const useAlbums = () => {
 
     const handlerRemoveAlbum = (id) => {
         // console.log(id);   
-    
+      
         Swal.fire({
             title: 'Esta seguro que desea eliminar?',
             text: "Cuidado el album sera eliminado!",
@@ -126,6 +131,7 @@ export const useAlbums = () => {
                         'success'
                     );
                 } catch (error) {
+                    console.log('Error al eliminar: '+error.response.data);
                     Swal.fire(
                         'Error al Eliminar!',
                         'El album no pudo ser eliminado!',

@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
 import Typography from '@mui/material/Typography';
-import { createTheme} from '@mui/material/styles';
 import { useAuth } from '../hooks/useAuth';
 import Swal from 'sweetalert2';
 import { Copyright } from './FooterLogin';
@@ -100,10 +99,7 @@ export const LoginPage = () => {
                 id="password"
                 autoComplete="off"
               />
-              {/* <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              /> */}
+              
               <Button
                 type="submit"
                 fullWidth
@@ -113,11 +109,7 @@ export const LoginPage = () => {
                 Sign In
               </Button>
               <Grid container>
-                {/* <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid> */}
+               
                 <Grid item>
                   <Link href="/signup" variant="body2">
                     {"No tienes cuenta? Registrate"}

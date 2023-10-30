@@ -58,13 +58,14 @@ export const useUsers = () => {
             console.log(error);
             if (error.response && error.response.status == 400) {
                 dispatch(loadingUserError(error.response.data));
-            } else if (error.response && error.response.status == 500 &&
-                error.response.data?.message?.includes('constraint')) {
-            
-                if (error.response.data?.message?.includes('UK_username')) {
+            } else if (error.response && error.response.status == 500 &&  error.response.data?.message?.includes('constraint')) {
+                    console.log('cond A');
+                if (error.response.data?.message?.includes('UK_username')) {  
+                    console.log('cond B');                  
                     dispatch(loadingUserError({ username: 'El username ya existe!' }));
                 }
                 if (error.response.data?.message?.includes('UK_email')) {
+                    console.log('cond C'); 
                     dispatch(loadingUserError({ email: 'El email ya existe!' }));
                 }
             } else if (error.response?.status == 401) {
@@ -102,6 +103,7 @@ export const useUsers = () => {
                         'success'
                     );
                 } catch (error) {
+                    console.log('Error al eliminar: '+error.response.data);
                     if (error.response?.status == 401) {
                         handlerLogout();
                     }

@@ -15,8 +15,8 @@ function AudioPlayerIsMobile(props) {
   const [selectedTrack, setSelectedTrack] = useState(null);
   const [selectedTrackAudio, setSelectedTrackAudio] = useState(null);
 
-  const imageURL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/img`;
-  const mp3URL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/mp3`;
+  const imageURL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/img`;
+  const mp3URL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/mp3`;
 
   useEffect(() => {
     serviceFindAllTrackByAlbumId(props.id)

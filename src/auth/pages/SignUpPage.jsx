@@ -3,8 +3,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import Alert from '@mui/material/Alert';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -73,17 +72,14 @@ export default function SignUp() {
                   label="User Name"
                   autoFocus
                 />
+                {errors && errors.username && (
+                <Alert severity="error">
+                  {errors.username}
+                </Alert>
+              )}
               </Grid>
-              {/* <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid> */}
+
+             
               <Grid item xs={12}>
                 <TextField
                   required
@@ -93,6 +89,11 @@ export default function SignUp() {
                   name="email"
                   autoComplete="email"
                 />
+                {errors && errors.email && (
+                <Alert severity="error">
+                  {errors.email}
+                </Alert>
+              )}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -105,12 +106,7 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              {/* <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid> */}
+              
             </Grid>
             <Button
               type="submit"

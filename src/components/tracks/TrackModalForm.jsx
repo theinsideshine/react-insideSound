@@ -11,10 +11,10 @@ export const TrackModalForm = () => {
 
   const { login } = useAuth();
 
-  const imageURL = `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/albums/img`;
+  const imageURL = `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/img`;
   const theme = useTheme(); // Obtiene el tema personalizado
   
-  const { trackSelected, handlerCloseTrackModalForm } = useTracks();
+  const { trackSelected, handlerCloseTrackModalForm,handlerAssociateAlbumToTrack } = useTracks();
   const {
     albums,
     isLoading,
@@ -64,13 +64,9 @@ export const TrackModalForm = () => {
     }
 
     console.log('album.id: ',selectedAlbumId +' track.id: '+trackSelected.id);
-    serviceAssociateAlbumToTrack(trackSelected.id, selectedAlbumId)
-    .then(response => {
-        console.log('se guardo ok');
-    })
-    .catch(error => {
-      console.log('error al guardar');
-    });
+
+    handlerAssociateAlbumToTrack(trackSelected.id, selectedAlbumId);
+    
     handlerCloseTrackModalForm();
   }
 
@@ -111,10 +107,11 @@ export const TrackModalForm = () => {
                   
                   </TableCell>
                   <TableCell>
-                    <Checkbox
-                     checked={selectedAlbumId && selectedAlbumId === album.id}
+                  <Checkbox
+                      checked={selectedAlbumId === album.id} // Compara con el ID del álbum
                       onChange={() => handleAlbumSelection(album.id)}
                     />
+
                   </TableCell>
                 </TableRow>
               ))}

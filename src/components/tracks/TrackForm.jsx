@@ -9,8 +9,8 @@ import '../../styles.css';
 
 export const TrackForm = ({ trackSelected }) => {
 
-  const UpLoadImageURL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/img`;
-  const UpLoadMp3URL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/mp3`;
+  const UpLoadImageURL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/img`;
+  const UpLoadMp3URL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/mp3`;
 
 
     const { initialTrackForm, handlerAddTrack, errors } = useTracks();

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { loadingTracks, initialTrackForm, addTrack, loadingTrackError, removeTrack, updateTrack, onTrackSelectedModalForm, onOpenTrackModalForm, onCloseTrackModalForm} from "../store/slices/tracks/tracksSlice";
-import { serviceFindAllTrackByUser, serviceRemoveTrack, serviceSaveTrack, serviceUpdateTrack } from "../services/tracksService";
+import { serviceAssociateAlbumToTrack, serviceFindAllTrackByUser, serviceRemoveTrack, serviceSaveTrack, serviceUpdateTrack } from "../services/tracksService";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
@@ -76,6 +76,19 @@ export const useTracks = () => {
             }       
   }
 
+  const handlerAssociateAlbumToTrack = ( trackId, albumId) => {
+
+  serviceAssociateAlbumToTrack(trackId, albumId)
+  .then(response => {
+    
+      console.log('se guardo ok');
+  })
+  .catch(error => {
+    console.log('Error al guardar: '+error.response.data);
+  });
+
+}
+
   const handlerRemoveTrack = (id) => {
     // console.log(id);   
 
@@ -139,6 +152,7 @@ export const useTracks = () => {
         handlerCloseTrack,
         handlerTrackSelectedModalForm,
         handlerCloseTrackModalForm,
-        handlerOpenTrackModalForm
+        handlerOpenTrackModalForm,
+        handlerAssociateAlbumToTrack
     }
 }

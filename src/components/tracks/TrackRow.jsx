@@ -16,8 +16,8 @@ export const TrackRow = ({ id, title }) => {
   const { handlerRemoveTrack, handlerTrackSelectedModalForm } = useTracks();
 
   const navigate = useNavigate();
-  const imageURL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/img`;
-  const mp3URL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/mp3`;
+  const imageURL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/img`;
+  const mp3URL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/mp3`;
 
   const isMobile = useMediaQuery('(max-width: 600px)'); // Define el punto de quiebre según tus necesidades
 

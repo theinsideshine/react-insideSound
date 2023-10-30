@@ -40,8 +40,8 @@ function AudioPlayerIs(props) {
   const [volume, setVolume] = useState(1); // Valor inicial del volumen (1 es el volumen máximo)
 
 
-  const imageURL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/img`;
-  const mp3URL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/tracks/mp3`;
+  const imageURL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/img`;
+  const mp3URL = `${import.meta.env.VITE_API_MSVC_TRACK_URL}/mp3`;
 
   const waveSurferRef = useRef(null);
 

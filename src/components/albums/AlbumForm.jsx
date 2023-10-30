@@ -11,7 +11,7 @@ import { useAuth } from "../../auth/hooks/useAuth";
 
 export const AlbumForm = ({ albumSelected }) => {
 
-  const UpLoadImageURL = `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/albums/img`;
+  const UpLoadImageURL = `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/img`;
 
     const { initialAlbumForm, errors, handlerAddAlbum} = useAlbums();
 

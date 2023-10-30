@@ -30,7 +30,7 @@ const AlbumPage = ({usernameNoAuth}) => {
 
   const theme = useTheme(); // Obtiene el tema personalizado
   const navigate = useNavigate();
-  const imageURL = `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/albums/img`;
+  const imageURL = `${import.meta.env.VITE_API_MSVC_ALBUM_URL}/img`;
   const { login } = useAuth();
  
   const {
