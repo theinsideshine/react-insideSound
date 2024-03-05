@@ -94,8 +94,15 @@ export const AlbumForm = ({ albumSelected }) => {
     formData.append("artist", albumForm.artist);
     formData.append("age", albumForm.age);
     formData.append("albumprivate", albumForm.albumprivate);
+    console.log("imageFile is: ",imageFile);
+    if (imageFile!=null){
     formData.append("imageFile", imageFile); // Here you append the actual file
-       
+     }  
+     // Iterar sobre formData y mostrar los valores
+    for (const pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+  }
+     
     handlerAddAlbum(formData);     
   };
 

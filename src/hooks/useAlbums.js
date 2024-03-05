@@ -44,20 +44,15 @@ export const useAlbums = () => {
                 } catch (error) {           
                     
                     if (error.response && error.response.status == 400) {
-                        console.log(error.response.data);
-                       dispatch(loadingAlbumError(error.response.data));
-                    }
-                    /*
-                    * Una forma de trapear el error de title duplicado es saber el identificardor del campo en la BBDD 
-                    */
-                    else if (error.response && error.response.status == 500 &&  error.response.data?.message?.includes('constraint')) {
-
-                            if (error.response.data?.message?.includes('UK_albumtitle')) { 
-                                dispatch(loadingAlbumError({ title: 'El Album ya existe!' }));
-                            }
-                    }else if (error.response && error.response.status == 500 &&
-                        error.response.data?.message?.includes('Maximum upload size exceeded')) {
-                          dispatch(loadingTrackError({ title: 'Los archivos no puede superar lo 10Mbytes' }));
+                
+                        dispatch(loadingAlbumError(error.response.data.errors));
+        
+                    } else if (error.response && error.response.status == 409){
+                        
+                        console.log(error.response.data.errors);
+                        dispatch(loadingAlbumError(error.response.data.errors));                
+                    } else if (error.response && error.response.status == 500){
+                        console.log('error: ',error);
                     }else {
                         console.log(error);
                         throw error;

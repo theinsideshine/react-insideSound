@@ -117,8 +117,14 @@ export const TrackForm = ({ trackSelected }) => {
     formData.append("id", trackForm.id);  
     formData.append("username", login.user.username);
     formData.append("title", trackForm.title);
+    //console.log("imageFile is: ",imageFile);
+    if (imageFile!=null){
     formData.append("imageFile", imageFile); // Here you append the actual file
-    formData.append("mp3File", audioFile); // Here you append the actual file    
+     } 
+    //console.log("mp3File is: ",mp3File);
+     if (audioFile!=null){
+     formData.append("mp3File", audioFile); // Here you append the actual file
+      }    
     handlerAddTrack(formData);     
   };
 

@@ -105,6 +105,11 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                 />
+                {errors && errors.password && (
+                  <Alert severity="error">
+                    {errors.password}
+                  </Alert>
+                )}
               </Grid>
               
             </Grid>
