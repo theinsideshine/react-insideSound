@@ -15,7 +15,8 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import { serviceFindAllUsernames } from "../../services/userService";
 import Swal from "sweetalert2";
 import { useTheme, alpha } from "@mui/material/styles";
-
+import { useMediaQuery } from "@mui/material";
+ 
 export const Navbar = () => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -78,8 +79,10 @@ export const Navbar = () => {
     loadUsernames();
   }, []);
 
+  const isMobile = useMediaQuery('(max-width:600px)'); // Agrega esta línea para obtener el estado del modo móvil
+
   return (
-    <AppBar position="static" sx={{ bgcolor: 'background.paper', color: 'text.primary' }}>
+    <AppBar position="static" sx={{ bgcolor: theme.palette.background.paper, color: theme.palette.text.primary }}>
       <Toolbar>
         <Hidden mdUp>
           <IconButton color="inherit" edge="start" onClick={toggleMenu}>
@@ -87,9 +90,11 @@ export const Navbar = () => {
           </IconButton>
         </Hidden>
 
-        <Typography variant="h6" component={Link} to="/" sx={{ textDecoration: "none", color: 'text.primary', fontFamily: "'Courier New', Courier, monospace" }}>
-          ISound
-        </Typography>
+        {isMobile && ( // Mostrar solo en modo móvil
+          <Typography variant="h6" component={Link} to="/" sx={{ textDecoration: "none", color: theme.palette.text.primary, fontFamily: "'Courier New', Courier, monospace" }}>
+            ISound
+          </Typography>
+        )}
 
         <Hidden smDown>
           <Button color="inherit" component={Link} to="/albums">Álbumes</Button>
@@ -102,7 +107,7 @@ export const Navbar = () => {
 
         <Hidden mdUp>
           <Drawer anchor="left" open={menuOpen} onClose={closeMenu}>
-            <List sx={{ width: "250px", bgcolor: 'background.paper' }}>
+            <List sx={{ width: "250px", bgcolor: theme.palette.primary.main }}>
               <ListItem component={Link} to="/albums" onClick={closeMenu}>
                 <ListItemIcon><AlbumIcon /></ListItemIcon>
                 <ListItemText primary="Álbumes" />
@@ -177,4 +182,3 @@ export const Navbar = () => {
     </AppBar>
   );
 };
-

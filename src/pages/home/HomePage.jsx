@@ -1,8 +1,11 @@
 import React from 'react';
-import { CssBaseline, Typography, useMediaQuery, Grid, Box } from '@mui/material';
+import { CssBaseline, Typography, useMediaQuery, Grid, Box, Button } from '@mui/material';
 import deckRetroImage from '../../assets/deck-retro.png';
+import { useTheme } from '@mui/material/styles';
 
 export const HomePage = () => {
+  const theme = useTheme(); // Obtén el tema actual
+
   const isMobile = useMediaQuery('(max-width:600px)');
   const typographyVariant = isMobile ? 'body2' : 'body1';
   const imagePaths = [deckRetroImage];
@@ -12,7 +15,7 @@ export const HomePage = () => {
       <CssBaseline />
       <Box 
         style={{ 
-          backgroundColor: '#F5F5DC', 
+          backgroundColor: theme.palette.background.default, // Utiliza el color de fondo de la paleta para el fondo
           padding: '20px', 
           display: 'flex', 
           flexDirection: 'column', 
@@ -22,24 +25,22 @@ export const HomePage = () => {
       >
         <Grid container spacing={2} justifyContent="center">
           {imagePaths.map((path, index) => (
-            <Grid item xs={12} sm={8} key={index}>
-              <img src={path} alt={`Image ${index}`} style={{ width: '100%', borderRadius: '10px' }} />
+            <Grid item xs={12} sm={6} key={index}> {/* Cambia el tamaño de la cuadrícula para la imagen */}
+              <img src={path} alt={`Image ${index}`} style={{ width: '100%', borderRadius: '10px', filter: theme.palette.mode === 'dark' ? 'brightness(0.5)' : 'brightness(1)' }} />
             </Grid>
           ))}
-          <Grid item xs={12} sm={8}>
-            <Typography 
-              variant={typographyVariant} 
-              style={{ 
-                fontFamily: "'Courier New', Courier, monospace", 
-                lineHeight: 1.6, 
-                textAlign: 'center' 
-              }}
-            >
-              El propósito es brindar una plataforma gratuita de difusión de bandas independientes. Los usuarios finales son creadores de música (Rock y pop) los cuales puedan mostrar sus trabajos. El estilo tendrá reminiscencias a lo artesanal y lo nacional. La funcionalidad deberá tener dos accesos principales, “descubrir nuevos temas” subidos e “ingresar temas nuevos”. Agregarle una interpretación de Inteligencia artificial que automáticamente traduzca las letras y así darle visibilidad y que se ponga atención a las letras e incentivar la buena escritura y poesía. Estéticamente debería verse como hecha artesanalmente para remarcar la estética artesanal y nacional, como un pasquín, por medio de recortes de diarios y revistas retro. Para nosotros
-            </Typography>
-          </Grid>
         </Grid>
+
+        {/* Texto grande */}
+        <Typography variant="h3" sx={{ marginTop: '20px', textAlign: 'center' }}>Todo está guardado en la memoria</Typography>
+        {/* Texto pequeño */}
+        <Typography variant="subtitle1" sx={{ marginTop: '10px', textAlign: 'center' }}>Siente el swing</Typography>
+        {/* Botón */}
+        <Button variant="contained" sx={{ mt: 4, bgcolor: 'primary.main', color: 'white' }}>Escúchala</Button>
       </Box>
     </>
   );
 };
+
+
+
