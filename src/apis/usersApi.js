@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const usersApi = axios.create({
-    baseURL: `${import.meta.env.VITE_API_MSVC_SECURITY_URL}/users`
+    baseURL: `${import.meta.env.VITE_API_BASE_URL}/users`
 });
 
 usersApi.interceptors.request.use(config => {

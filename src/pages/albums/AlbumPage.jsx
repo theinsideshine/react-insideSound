@@ -134,7 +134,8 @@ const AlbumPage = ({usernameNoAuth}) => {
                       sx={{
                         pt: '56.25%',
                       }}
-                      image={`${imageURL}/${album.id}?${new Date().getTime()}`}
+                      image={`${imageURL}/${album.id}?${new Date().getTime()}`}                     
+  
                       onError={(e) => {
                         e.target.src = '/public/images/image-not-available.jpg';
                       }}

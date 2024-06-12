@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AppBar, Toolbar, Button, Typography, IconButton, Drawer, List, ListItem, ListItemText, ListItemIcon } from "@mui/material";
+import { AppBar, Toolbar, Button, Typography, IconButton, Drawer, List, ListItem, ListItemText, ListItemIcon, InputBase } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Hidden from "@mui/material/Hidden";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,16 +14,15 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import { serviceFindAllUsernames } from "../../services/userService";
 import Swal from "sweetalert2";
-import { useTheme } from "@mui/material/styles"; // Importa useTheme
+import { useTheme } from "@mui/material/styles";
+import { alpha } from '@mui/material/styles';
 
 export const Navbar = () => {
-  const theme = useTheme(); // Obtiene el tema personalizado del contexto
-
+  const theme = useTheme();
   const navigate = useNavigate();
   const { login, handlerLogout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
   const [usernames, setUsernames] = useState([]);
 
   const toggleMenu = () => {
@@ -43,42 +42,32 @@ export const Navbar = () => {
   };
 
   const handleSearchChange = (event) => {
-    const newValue = event.target.value;
-    setSearchQuery(newValue);
+    setSearchQuery(event.target.value);
   };
 
-  const userNoexist =() => {
-    console.log("Nombre de usuario no válido");
-      Swal.fire(
-        'No encontrado!',
-        'El usuario no existe!',
-        'warning'
+  const userNoexist = () => {
+    Swal.fire(
+      'No encontrado!',
+      'El usuario no existe!',
+      'warning'
     );
   }
 
-  const navigateHomePageAlbum =() => {
-    console.log("Nombre de usuario:", searchQuery);
-     navigate(`/home/albums/${searchQuery}`);
-}
+  const navigateHomePageAlbum = () => {
+    navigate(`/home/albums/${searchQuery}`);
+  }
 
   const handleSearchIconClick = () => {
     if (usernames.includes(searchQuery)) {
-      console.log("Nombre de usuario:", searchQuery);
       navigateHomePageAlbum();
     } else {
-      
       userNoexist();
     }
-  };  
+  };
 
   const handleSearchSubmit = (event) => {
     if (event.key === "Enter") {
-      if (usernames.includes(searchQuery)) {
-        navigateHomePageAlbum();
-      } else {
-        userNoexist();
-       
-      }
+      handleSearchIconClick();
     }
   };
 
@@ -86,18 +75,16 @@ export const Navbar = () => {
     async function loadUsernames() {
       try {
         const usernamesResponse = await serviceFindAllUsernames();
-        
         setUsernames(usernamesResponse);
       } catch (error) {
         console.error("Error al cargar los nombres de usuario:", error);
       }
     }
-
     loadUsernames();
   }, []);
 
   return (
-    <AppBar position="static" style={{ height: "55px" }}>
+    <AppBar position="static" style={{ backgroundColor: "#8B4513" }}>
       <Toolbar>
         <Hidden mdUp>
           <IconButton color="inherit" edge="start" onClick={toggleMenu}>
@@ -105,123 +92,74 @@ export const Navbar = () => {
           </IconButton>
         </Hidden>
 
-        <div>
-          <Typography variant="h7" component={Link} to="/" color="inherit" style={{ textDecoration: "none" }}>
-            ISound
-          </Typography>
-        </div>
+        <Typography variant="h6" component={Link} to="/" color="inherit" style={{ textDecoration: "none", fontFamily: "'Courier New', Courier, monospace" }}>
+          ISound
+        </Typography>
 
         <Hidden smDown>
-          <Button color="inherit" component={Link} to="/albums">
-            Albumes
-          </Button>
-          <Button color="inherit" component={Link} to="/tracks">
-            Canciones
-          </Button>
-          <Button color="inherit" component={Link} to="/tracks/register">
-            Subir
-          </Button>
+          <Button color="inherit" component={Link} to="/albums">Álbumes</Button>
+          <Button color="inherit" component={Link} to="/tracks">Canciones</Button>
+          <Button color="inherit" component={Link} to="/tracks/register">Subir</Button>
           {login.isAdmin && (
-            <Button color="inherit" component={Link} to="/users">
-              Usuarios
-            </Button>
+            <Button color="inherit" component={Link} to="/users">Usuarios</Button>
           )}
         </Hidden>
 
         <Hidden mdUp>
-          <Drawer anchor="left" 
-                  open={menuOpen}
-                  onClose={closeMenu}
-                  variant="temporary"                 
-
-                  PaperProps={{
-                    style: {
-                      width: "250px",
-                    },
-                  }}
-                   >
-            <div style={{ width: "250px" }}>
-              <List>
-                <ListItem component={Link} to="/albums" onClick={closeMenu}>
-                  <ListItemIcon>
-                    <AlbumIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Albumes" primaryTypographyProps={{ color: theme.palette.primary.main }}/>
+          <Drawer anchor="left" open={menuOpen} onClose={closeMenu}>
+            <List style={{ width: "250px", backgroundColor: "#F5F5DC" }}>
+              <ListItem component={Link} to="/albums" onClick={closeMenu}>
+                <ListItemIcon><AlbumIcon /></ListItemIcon>
+                <ListItemText primary="Álbumes" />
+              </ListItem>
+              <ListItem component={Link} to="/tracks" onClick={closeMenu}>
+                <ListItemIcon><MusicNoteIcon /></ListItemIcon>
+                <ListItemText primary="Canciones" />
+              </ListItem>
+              <ListItem component={Link} to="/tracks/register" onClick={closeMenu}>
+                <ListItemIcon><CloudUploadIcon /></ListItemIcon>
+                <ListItemText primary="Subir" />
+              </ListItem>
+              {login.isAdmin && (
+                <ListItem component={Link} to="/users" onClick={closeMenu}>
+                  <ListItemIcon><PeopleIcon /></ListItemIcon>
+                  <ListItemText primary="Usuarios" />
                 </ListItem>
-                <ListItem component={Link} to="/tracks" onClick={closeMenu}>
-                  <ListItemIcon>
-                    <MusicNoteIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Canciones" primaryTypographyProps={{ color: theme.palette.primary.main }}/>
-                </ListItem>
-                <ListItem component={Link} to="/tracks/register" onClick={closeMenu}>
-                  <ListItemIcon>
-                    <CloudUploadIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Subir" primaryTypographyProps={{ color: theme.palette.primary.main }} />
-                </ListItem>
-                {login.isAdmin && (
-                  <ListItem component={Link} to="/users" onClick={closeMenu}>
-                    <ListItemIcon>
-                      <PeopleIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Usuarios" primaryTypographyProps={{ color: theme.palette.primary.main }}/>
-                    
-                  </ListItem>
-                )}
-              </List>
-            </div>
+              )}
+            </List>
           </Drawer>
         </Hidden>
 
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-        <SearchIcon style={{ cursor: "pointer" }} onClick={handleSearchIconClick} />
-          {/* Condición para mostrar la barra de búsqueda solo si el usuario no ha iniciado sesión */}
-            {!login.isAuth && (
-              <>
-                
-                <input
-                  type="text"
-                  placeholder="Usuarios"
-                  value={searchQuery}
-                  style={{ width: '100px' }}
-                  onChange={handleSearchChange}
-                  onKeyPress={handleSearchSubmit}
-                />
-                
-              </>
-            )}
-
-
-          {searchResults.length > 0 && (
-            <div style={{ position: "absolute", top: "60px", left: "0", right: "0", background: "#fff", zIndex: "999" }}>
-              <List>
-                {searchResults.map((user) => (
-                  <ListItem
-                    button
-                    key={user.id}
-                    component={Link}
-                    to={`/user/${user.username}`}
-                    onClick={closeMenu}
-                  >
-                    <ListItemText primary={user.username} />
-                  </ListItem>
-                ))}
-              </List>
+          <div style={{ position: 'relative', borderRadius: theme.shape.borderRadius, backgroundColor: alpha(theme.palette.common.white, 0.15), '&:hover': { backgroundColor: alpha(theme.palette.common.white, 0.25) }, marginRight: theme.spacing(2), marginLeft: 0, width: 'auto' }}>
+            <div style={{ padding: theme.spacing(0, 2), height: '100%', position: 'absolute', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <SearchIcon />
             </div>
-          )}
-          <Typography variant="body1" color="inherit" style={{ marginRight: "10px" }}>
+            <InputBase
+              placeholder="Buscar…"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              onKeyPress={handleSearchSubmit}
+              style={{ color: 'inherit', paddingLeft: `calc(1em + ${theme.spacing(4)})`, transition: theme.transitions.create('width'), width: '12ch', '&:focus': { width: '20ch' } }}
+            />
+          </div>
+
+          <Typography variant="body1" color="inherit" style={{ marginRight: "10px", fontFamily: "'Courier New', Courier, monospace" }}>
             {login.user?.username}
           </Typography>
           {login.user?.username ? (
-            
-            <LogoutIcon style={{ cursor: "pointer" }} onClick={handlerLogout} />
+            <IconButton color="inherit" onClick={handlerLogout}>
+              <LogoutIcon />
+            </IconButton>
           ) : (
             <>
-             <LoginIcon style={{ cursor: "pointer" }} onClick={clickLogin} />
-             <AppRegistrationIcon style={{ cursor: "pointer" }} onClick={clickSignup} />
-            
-           </>
+              <IconButton color="inherit" onClick={clickLogin}>
+                <LoginIcon />
+              </IconButton>
+              <IconButton color="inherit" onClick={clickSignup}>
+                <AppRegistrationIcon />
+              </IconButton>
+            </>
           )}
         </div>
       </Toolbar>

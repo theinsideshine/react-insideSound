@@ -83,7 +83,7 @@ export const useAlbums = () => {
             const result = await serviceFindAllAlbumByUsername(username);
             dispatch(loadingAlbums(result.data));
         } catch (error) {
-            if (error.response?.status == 404) {
+            if (error.response?.status == 400) {
                 dispatch(loadingAlbums([])); //carga vacio para mostrar no quedarse en isloading=true
             };
         }
@@ -96,7 +96,7 @@ export const useAlbums = () => {
             const result = await serviceFindPublicAlbumsByUsername(username);
             dispatch(loadingAlbums(result.data));
         } catch (error) {
-            if (error.response?.status == 404) {
+            if (error.response?.status == 400) {
                 dispatch(loadingAlbums([])); //carga vacio para mostrar no quedarse en isloading=true
             };
         }
