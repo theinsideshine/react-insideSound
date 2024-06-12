@@ -14,8 +14,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import { serviceFindAllUsernames } from "../../services/userService";
 import Swal from "sweetalert2";
-import { useTheme } from "@mui/material/styles";
-import { alpha } from '@mui/material/styles';
+import { useTheme, alpha } from "@mui/material/styles";
 
 export const Navbar = () => {
   const theme = useTheme();
@@ -46,11 +45,7 @@ export const Navbar = () => {
   };
 
   const userNoexist = () => {
-    Swal.fire(
-      'No encontrado!',
-      'El usuario no existe!',
-      'warning'
-    );
+    Swal.fire('No encontrado!', 'El usuario no existe!', 'warning');
   }
 
   const navigateHomePageAlbum = () => {
@@ -84,7 +79,7 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <AppBar position="static" style={{ backgroundColor: "#8B4513" }}>
+    <AppBar position="static" sx={{ bgcolor: 'background.paper', color: 'text.primary' }}>
       <Toolbar>
         <Hidden mdUp>
           <IconButton color="inherit" edge="start" onClick={toggleMenu}>
@@ -92,7 +87,7 @@ export const Navbar = () => {
           </IconButton>
         </Hidden>
 
-        <Typography variant="h6" component={Link} to="/" color="inherit" style={{ textDecoration: "none", fontFamily: "'Courier New', Courier, monospace" }}>
+        <Typography variant="h6" component={Link} to="/" sx={{ textDecoration: "none", color: 'text.primary', fontFamily: "'Courier New', Courier, monospace" }}>
           ISound
         </Typography>
 
@@ -107,7 +102,7 @@ export const Navbar = () => {
 
         <Hidden mdUp>
           <Drawer anchor="left" open={menuOpen} onClose={closeMenu}>
-            <List style={{ width: "250px", backgroundColor: "#F5F5DC" }}>
+            <List sx={{ width: "250px", bgcolor: 'background.paper' }}>
               <ListItem component={Link} to="/albums" onClick={closeMenu}>
                 <ListItemIcon><AlbumIcon /></ListItemIcon>
                 <ListItemText primary="Álbumes" />
@@ -131,8 +126,24 @@ export const Navbar = () => {
         </Hidden>
 
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-          <div style={{ position: 'relative', borderRadius: theme.shape.borderRadius, backgroundColor: alpha(theme.palette.common.white, 0.15), '&:hover': { backgroundColor: alpha(theme.palette.common.white, 0.25) }, marginRight: theme.spacing(2), marginLeft: 0, width: 'auto' }}>
-            <div style={{ padding: theme.spacing(0, 2), height: '100%', position: 'absolute', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{
+            position: 'relative',
+            borderRadius: theme.shape.borderRadius,
+            backgroundColor: alpha(theme.palette.common.white, 0.15),
+            '&:hover': { backgroundColor: alpha(theme.palette.common.white, 0.25) },
+            marginRight: theme.spacing(2),
+            marginLeft: 0,
+            width: 'auto'
+          }}>
+            <div style={{
+              padding: theme.spacing(0, 2),
+              height: '100%',
+              position: 'absolute',
+              pointerEvents: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
               <SearchIcon />
             </div>
             <InputBase
@@ -140,11 +151,11 @@ export const Navbar = () => {
               value={searchQuery}
               onChange={handleSearchChange}
               onKeyPress={handleSearchSubmit}
-              style={{ color: 'inherit', paddingLeft: `calc(1em + ${theme.spacing(4)})`, transition: theme.transitions.create('width'), width: '12ch', '&:focus': { width: '20ch' } }}
+              sx={{ color: 'inherit', paddingLeft: `calc(1em + ${theme.spacing(4)})`, transition: theme.transitions.create('width'), width: '12ch', '&:focus': { width: '20ch' } }}
             />
           </div>
 
-          <Typography variant="body1" color="inherit" style={{ marginRight: "10px", fontFamily: "'Courier New', Courier, monospace" }}>
+          <Typography variant="body1" color="text.primary" sx={{ marginRight: "10px", fontFamily: "'Courier New', Courier, monospace" }}>
             {login.user?.username}
           </Typography>
           {login.user?.username ? (
@@ -166,3 +177,4 @@ export const Navbar = () => {
     </AppBar>
   );
 };
+
