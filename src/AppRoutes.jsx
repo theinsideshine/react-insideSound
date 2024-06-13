@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { LoginPage } from './auth/pages/LoginPage';
 import { HomePage } from './pages/home/HomePage';
 import { useSelector } from 'react-redux';
-import SignUp from './auth/pages/SignUpPage';
+import { SignUp }  from './auth/pages/SignUpPage';
 import { UserRoutes } from './routes/UserRoutes';
 import { HomePageAlbum } from './pages/home/HomePageAlbum';
 import { HomePagePlay } from './pages/home/HomePagePlay';

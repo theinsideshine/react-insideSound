@@ -10,18 +10,17 @@ import Box from '@mui/material/Box';
 
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme} from '@mui/material/styles';
+
 import { useUsers } from '../../hooks/useUsers';
-import { Copyright } from './FooterLogin';
+import { useTheme } from '@mui/material/styles';
 
 
 
-// TODO remove, this demo shouldn't need to reset the theme.
 
-const defaultTheme = createTheme();
+export const SignUp=()=>{
 
-export default function SignUp() {
 
+  const theme = useTheme(); // Obtén el tema actual
 
     const { initialUserForm, handlerAddUser, errors } = useUsers();
     
@@ -121,21 +120,22 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/login" variant="body2">
-                  Tienes una cuenta? Entrar
+            <Grid container>
+
+            <Grid item>
+                <Link href="/login" variant="body2" sx={{ color: theme.palette.primary.main }}>
+                  {" Tienes una cuenta? Entrar"}
                 </Link>
               </Grid>
+              
             </Grid>
           </Box>
         </Box>
         <Link href="/" variant="body2">
                     {"Volver"}
          </Link>
-        <Copyright sx={{ mt: 5 }} />
+        
       </Container>
     </>
   );
 }
-

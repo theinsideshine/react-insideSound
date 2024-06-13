@@ -36,7 +36,32 @@ export const HomePage = () => {
         {/* Texto pequeño */}
         <Typography variant="subtitle1" sx={{ marginTop: '10px', textAlign: 'center' }}>Siente el swing</Typography>
         {/* Botón */}
-        <Button variant="contained" sx={{ mt: 4, bgcolor: 'primary.main', color: 'white' }}>Escúchala</Button>
+        <Box
+  sx={{
+    width: '50%',
+    textAlign: 'center',
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+  }}
+>
+  <Button
+    variant="contained"
+    sx={{
+      width: '20%', // Ancho del botón al 100% del contenedor
+      height: '40px', // Altura del botón
+      bgcolor: 'primary.main',
+      color: 'white',
+      fontSize: '0.8rem', // Tamaño de fuente del botón
+      '&:hover': {
+        bgcolor: 'primary.dark', // Color de fondo al pasar el mouse
+      },
+    }}
+  >
+    Escúchala
+  </Button>
+</Box>
+
       </Box>
     </>
   );

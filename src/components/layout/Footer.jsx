@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { IconButton } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
+import { CopyrightRight } from './FooterCopyright';
 
 export const Footer = () => {
   return (
@@ -18,12 +19,9 @@ export const Footer = () => {
         textAlign: 'center',
       }}
     >
-      <IconButton /* onClick={toggleDarkMode} */ color="inherit" sx={{ marginLeft: '-8px' }}>
-        <Brightness4Icon />
-      </IconButton>
-      <Typography variant="body1">
-        ISound © {new Date().getFullYear()}
-      </Typography>
+      
+      <CopyrightRight sx={{ mt: 5 }} />
+      
     </Box>
   );
 };
