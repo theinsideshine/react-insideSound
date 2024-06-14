@@ -9,18 +9,32 @@ import CssBaseline from '@mui/material/CssBaseline';
 const theme = createTheme({
   palette: {
     background: {
-      default: '#282831', // Color de fondo general
-      paper: '#252231',   // Color de fondo para Navbar y Footer
+      default: '#282831',
+      paper: '#252231',
     },
     text: {
-      primary: '#EEEEEE', // Color de letra primario para toda la aplicación
-      secondary: '#008A90', // Color de texto secundario
+      primary: '#EEEEEE',
+      secondary: '#008A90',
     },
     primary: {
-      main: '#008A90',    // Color primario para el botón
+      main: '#008A90',
+    },
+  },
+  typography: {
+    fontFamily: 'Mooli, sans-serif', // Fuente predeterminada
+    h3: {
+      fontFamily: 'Playfair Display, serif',
+      fontWeight: 700, // Bold
+    },
+    subtitle1: {
+      fontFamily: 'Lato, sans-serif',
+    },
+    button: {
+      fontFamily: 'Mooli, sans-serif',
     },
   },
 });
+export default theme;
 
 export const SoundApp = () => {
   return (

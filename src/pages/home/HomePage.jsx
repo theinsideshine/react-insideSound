@@ -31,8 +31,8 @@ export const HomePage = () => {
           ))}
         </Grid>
 
-        {/* Texto grande */}
-        <Typography variant="h3" sx={{ marginTop: '20px', textAlign: 'center' }}>Todo está guardado en la memoria</Typography>
+         {/* Texto grande */}
+         <Typography variant="h3" sx={{ marginTop: '20px', textAlign: 'center' }}>Todo está guardado en la memoria</Typography>
         {/* Texto pequeño */}
         <Typography variant="subtitle1" sx={{ marginTop: '10px', textAlign: 'center' }}>Siente el swing</Typography>
         {/* Botón */}
