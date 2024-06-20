@@ -1,5 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { AppBar, Toolbar, Button, Typography, IconButton, Drawer, List, ListItem, ListItemText, ListItemIcon, InputBase } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Typography,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  InputBase,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Hidden from "@mui/material/Hidden";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,14 +21,14 @@ import AlbumIcon from "@mui/icons-material/Album";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import PeopleIcon from "@mui/icons-material/People";
-import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import { serviceFindAllUsernames } from "../../services/userService";
 import Swal from "sweetalert2";
 import { useTheme, alpha } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
- 
+
 export const Navbar = () => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -31,11 +43,11 @@ export const Navbar = () => {
 
   const clickLogin = () => {
     navigate('/login');
-  }
+  };
 
   const clickSignup = () => {
     navigate('/signup');
-  }
+  };
 
   const closeMenu = () => {
     setMenuOpen(false);
@@ -47,11 +59,11 @@ export const Navbar = () => {
 
   const userNoexist = () => {
     Swal.fire('No encontrado!', 'El usuario no existe!', 'warning');
-  }
+  };
 
   const navigateHomePageAlbum = () => {
     navigate(`/home/albums/${searchQuery}`);
-  }
+  };
 
   const handleSearchIconClick = () => {
     if (usernames.includes(searchQuery)) {
@@ -79,10 +91,13 @@ export const Navbar = () => {
     loadUsernames();
   }, []);
 
-  const isMobile = useMediaQuery('(max-width:600px)'); // Agrega esta línea para obtener el estado del modo móvil
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   return (
-    <AppBar position="static" sx={{ bgcolor: theme.palette.background.paper, color: theme.palette.text.primary }}>
+    <AppBar
+      position="static"
+      sx={{ bgcolor: theme.palette.background.paper, color: theme.palette.text.primary }}
+    >
       <Toolbar>
         <Hidden mdUp>
           <IconButton color="inherit" edge="start" onClick={toggleMenu}>
@@ -90,39 +105,76 @@ export const Navbar = () => {
           </IconButton>
         </Hidden>
 
-        {isMobile && ( // Mostrar solo en modo móvil
-          <Typography variant="h6" component={Link} to="/" sx={{ textDecoration: "none", color: theme.palette.text.primary, fontFamily: "'Courier New', Courier, monospace" }}>
+        {isMobile && (
+          <Typography
+            variant="h6"
+            component={Link}
+            to="/"
+            sx={{ textDecoration: "none", color: theme.palette.text.primary, fontFamily: "'Courier New', Courier, monospace" }}
+          >
             ISound
           </Typography>
         )}
 
         <Hidden smDown>
-          <Button color="inherit" component={Link} to="/albums">Álbumes</Button>
-          <Button color="inherit" component={Link} to="/tracks">Canciones</Button>
-          <Button color="inherit" component={Link} to="/tracks/register">Subir</Button>
+          <Button color="inherit" component={Link} to="/albums">
+            Álbumes
+          </Button>
+          <Button color="inherit" component={Link} to="/tracks">
+            Canciones
+          </Button>
+          <Button color="inherit" component={Link} to="/tracks/register">
+            Subir
+          </Button>
           {login.isAdmin && (
-            <Button color="inherit" component={Link} to="/users">Usuarios</Button>
+            <Button color="inherit" component={Link} to="/users">
+              Usuarios
+            </Button>
           )}
         </Hidden>
+
+        <div style={{ flexGrow: 1 }} />
+
+        <Hidden smDown>
+          <Typography
+            variant="h6"
+            sx={{
+              fontFamily: "'Courier New', Courier, monospace",
+              textAlign: "center",
+            }}
+          >
+            ISound
+          </Typography>
+        </Hidden>
+
+        <div style={{ flexGrow: 1 }} />
 
         <Hidden mdUp>
           <Drawer anchor="left" open={menuOpen} onClose={closeMenu}>
             <List sx={{ width: "250px", bgcolor: theme.palette.primary.main }}>
               <ListItem component={Link} to="/albums" onClick={closeMenu}>
-                <ListItemIcon><AlbumIcon /></ListItemIcon>
+                <ListItemIcon>
+                  <AlbumIcon />
+                </ListItemIcon>
                 <ListItemText primary="Álbumes" />
               </ListItem>
               <ListItem component={Link} to="/tracks" onClick={closeMenu}>
-                <ListItemIcon><MusicNoteIcon /></ListItemIcon>
+                <ListItemIcon>
+                  <MusicNoteIcon />
+                </ListItemIcon>
                 <ListItemText primary="Canciones" />
               </ListItem>
               <ListItem component={Link} to="/tracks/register" onClick={closeMenu}>
-                <ListItemIcon><CloudUploadIcon /></ListItemIcon>
+                <ListItemIcon>
+                  <CloudUploadIcon />
+                </ListItemIcon>
                 <ListItemText primary="Subir" />
               </ListItem>
               {login.isAdmin && (
                 <ListItem component={Link} to="/users" onClick={closeMenu}>
-                  <ListItemIcon><PeopleIcon /></ListItemIcon>
+                  <ListItemIcon>
+                    <PeopleIcon />
+                  </ListItemIcon>
                   <ListItemText primary="Usuarios" />
                 </ListItem>
               )}
@@ -131,24 +183,28 @@ export const Navbar = () => {
         </Hidden>
 
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-          <div style={{
-            position: 'relative',
-            borderRadius: theme.shape.borderRadius,
-            backgroundColor: alpha(theme.palette.common.white, 0.15),
-            '&:hover': { backgroundColor: alpha(theme.palette.common.white, 0.25) },
-            marginRight: theme.spacing(2),
-            marginLeft: 0,
-            width: 'auto'
-          }}>
-            <div style={{
-              padding: theme.spacing(0, 2),
-              height: '100%',
-              position: 'absolute',
-              pointerEvents: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
+          <div
+            style={{
+              position: "relative",
+              borderRadius: theme.shape.borderRadius,
+              backgroundColor: alpha(theme.palette.common.white, 0.15),
+              "&:hover": { backgroundColor: alpha(theme.palette.common.white, 0.25) },
+              marginRight: theme.spacing(2),
+              marginLeft: 0,
+              width: "auto",
+            }}
+          >
+            <div
+              style={{
+                padding: theme.spacing(0, 2),
+                height: "100%",
+                position: "absolute",
+                pointerEvents: "none",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <SearchIcon />
             </div>
             <InputBase
@@ -156,11 +212,21 @@ export const Navbar = () => {
               value={searchQuery}
               onChange={handleSearchChange}
               onKeyPress={handleSearchSubmit}
-              sx={{ color: 'inherit', paddingLeft: `calc(1em + ${theme.spacing(4)})`, transition: theme.transitions.create('width'), width: '12ch', '&:focus': { width: '20ch' } }}
+              sx={{
+                color: "inherit",
+                paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+                transition: theme.transitions.create("width"),
+                width: "12ch",
+                "&:focus": { width: "20ch" },
+              }}
             />
           </div>
 
-          <Typography variant="body1" color="text.primary" sx={{ marginRight: "10px", fontFamily: "'Courier New', Courier, monospace" }}>
+          <Typography
+            variant="body1"
+            color="text.primary"
+            sx={{ marginRight: "10px", fontFamily: "'Courier New', Courier, monospace" }}
+          >
             {login.user?.username}
           </Typography>
           {login.user?.username ? (
