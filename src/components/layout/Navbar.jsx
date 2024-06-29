@@ -151,31 +151,31 @@ export const Navbar = () => {
 
         <Hidden mdUp>
           <Drawer anchor="left" open={menuOpen} onClose={closeMenu}>
-            <List sx={{ width: "250px", bgcolor: theme.palette.primary.main }}>
-              <ListItem component={Link} to="/albums" onClick={closeMenu}>
+            <List sx={{ width: "250px", bgcolor: theme.palette.background.paper }}>
+              <ListItem button component={Link} to="/albums" onClick={closeMenu}>
                 <ListItemIcon>
-                  <AlbumIcon />
+                  <AlbumIcon sx={{ color: theme.palette.primary.main }} />
                 </ListItemIcon>
-                <ListItemText primary="Álbumes" />
+                <ListItemText primary="Álbumes" sx={{ color: theme.palette.text.primary }} />
               </ListItem>
-              <ListItem component={Link} to="/tracks" onClick={closeMenu}>
+              <ListItem button component={Link} to="/tracks" onClick={closeMenu}>
                 <ListItemIcon>
-                  <MusicNoteIcon />
+                  <MusicNoteIcon sx={{ color: theme.palette.primary.main }} />
                 </ListItemIcon>
-                <ListItemText primary="Canciones" />
+                <ListItemText primary="Canciones" sx={{ color: theme.palette.text.primary }} />
               </ListItem>
-              <ListItem component={Link} to="/tracks/register" onClick={closeMenu}>
+              <ListItem button component={Link} to="/tracks/register" onClick={closeMenu}>
                 <ListItemIcon>
-                  <CloudUploadIcon />
+                  <CloudUploadIcon sx={{ color: theme.palette.primary.main }} />
                 </ListItemIcon>
-                <ListItemText primary="Subir" />
+                <ListItemText primary="Subir" sx={{ color: theme.palette.text.primary }} />
               </ListItem>
               {login.isAdmin && (
-                <ListItem component={Link} to="/users" onClick={closeMenu}>
+                <ListItem button component={Link} to="/users" onClick={closeMenu}>
                   <ListItemIcon>
-                    <PeopleIcon />
+                    <PeopleIcon sx={{ color: theme.palette.text.primary }} />
                   </ListItemIcon>
-                  <ListItemText primary="Usuarios" />
+                  <ListItemText primary="Usuarios" sx={{ color: theme.palette.text.primary }} />
                 </ListItem>
               )}
             </List>
@@ -248,3 +248,4 @@ export const Navbar = () => {
     </AppBar>
   );
 };
+
