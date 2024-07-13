@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid'; // Importa el componente Grid
 import '../../styles.css';
 
 import { serviceFindAllTrackByAlbumId } from '../../services/tracksService';
+import AudioPlayer from '../layout/audioPlayer';
 
 
 function AudioPlayerIsMobile(props) {
@@ -53,7 +54,7 @@ function AudioPlayerIsMobile(props) {
         </Grid>
         <Grid item xs={12} sm={4}>
           <div>
-            <audio controls src={selectedTrackAudio} style={{ maxHeight: '30px', width: '100%', marginRight: '8px' }} />
+            <AudioPlayer controls src={selectedTrackAudio} style={{ maxHeight: '30px', width: '100%', marginRight: '8px' }} />
           </div>
         </Grid>
         <Grid item xs={12} sm={4}>

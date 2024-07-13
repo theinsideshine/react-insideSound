@@ -18,6 +18,10 @@ const theme = createTheme({
     },
     primary: {
       main: '#008A90',
+      
+    },    
+    secondary: {  // Cambia el color secundario aquí
+      main: '#009074', // Cambia este valor por el color que desees
     },
   },
   typography: {

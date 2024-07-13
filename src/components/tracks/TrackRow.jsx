@@ -66,13 +66,13 @@ export const TrackRow = ({ id, title }) => {
 
         <TableCell>
           <IconButton onClick={() => handlerTrackSelectedModalForm({ id, title })}>
-            <AddIcon style={{ color: selectedTrack === id ? theme.palette.primary.main : theme.palette.secondary.main ,fontSize: isMobile ? 16 : 24  }} />
+            <AddIcon style={{ color: theme.palette.primary.main  ,fontSize: isMobile ? 16 : 24  }} />
           </IconButton>
           <IconButton onClick={() => handleEdit(id)}>
-            <EditIcon style={{ color: selectedTrack === id ?  theme.palette.primary.main : theme.palette.secondary.main, fontSize: isMobile ? 16 : 24  }} />
+            <EditIcon style={{ color: theme.palette.primary.main , fontSize: isMobile ? 16 : 24  }} />
           </IconButton>
           <IconButton onClick={() => handleRemove(id)}>
-            <DeleteIcon style={{ color: selectedTrack === id ?  theme.palette.primary.main : theme.palette.secondary.main, fontSize: isMobile ? 16 : 24  }} />
+            <DeleteIcon style={{ color: theme.palette.primary.main , fontSize: isMobile ? 16 : 24  }} />
           </IconButton>
         </TableCell>
       </TableRow>

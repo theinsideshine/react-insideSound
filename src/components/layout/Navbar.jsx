@@ -173,7 +173,7 @@ export const Navbar = () => {
               {login.isAdmin && (
                 <ListItem button component={Link} to="/users" onClick={closeMenu}>
                   <ListItemIcon>
-                    <PeopleIcon sx={{ color: theme.palette.text.primary }} />
+                    <PeopleIcon sx={{ color: theme.palette.primary.main }} />
                   </ListItemIcon>
                   <ListItemText primary="Usuarios" sx={{ color: theme.palette.text.primary }} />
                 </ListItem>

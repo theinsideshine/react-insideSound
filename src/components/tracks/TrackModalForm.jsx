@@ -121,7 +121,7 @@ export const TrackModalForm = () => {
           <div style={{ margin: "16px 0" }}>
           <Button
               variant="contained" // Puedes ajustar el tipo de botón (contained, outlined, etc.)
-              style={{ color: theme.palette.primary.main }}
+              style={{ color: theme.palette.background.paper}}
               onClick={() => handlerSaveAlbumIdModalForm()}
             >
               Guardar
@@ -130,7 +130,7 @@ export const TrackModalForm = () => {
           {!handlerCloseTrackModalForm || (
             <Button
             variant="contained" // Puedes ajustar el tipo de botón (contained, outlined, etc.)
-            style={{ color: theme.palette.primary.main }}
+            style={{ color:  theme.palette.background.paper}}
               
               onClick={() => handlerCloseTrackModalForm()}
             >
