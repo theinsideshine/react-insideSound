@@ -3,15 +3,15 @@ import { Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { UserForm } from "./UserForm";
 import { useUsers } from "../../hooks/useUsers";
-import { useTheme } from '@mui/material/styles'; // Importa useTheme
+import { useTheme } from '@mui/material/styles';
 
 export const UserModalForm = () => {
-  const theme = useTheme(); // Obtiene el tema personalizado
+  const theme = useTheme(); 
   const { userSelected, handlerCloseUserForm } = useUsers();
 
   return (
     <Dialog open={true} fullWidth maxWidth="sm">
-      <DialogTitle>
+      <DialogTitle style={{ backgroundColor: theme.palette.background.paper, color: theme.palette.text.primary }}>
         {userSelected.id > 0 ? "Editar" : "Crear"} Usuarios
         <IconButton
           edge="end"
@@ -23,9 +23,10 @@ export const UserModalForm = () => {
           <Close />
         </IconButton>
       </DialogTitle>
-      <DialogContent>
+      <DialogContent style={{ backgroundColor: theme.palette.background.paper, color: theme.palette.text.primary }}>
         <UserForm userSelected={userSelected} handlerCloseForm={handlerCloseUserForm} />
       </DialogContent>
     </Dialog>
   );
 };
+
