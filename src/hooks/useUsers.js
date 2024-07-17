@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import { serviceFindAllPagesUser, serviceRemoveUser, serviceSaveUser, serviceUpdateUser } from "../services/userService";
 import { useDispatch, useSelector } from "react-redux";
 import { initialUserForm, addUser, removeUser, updateUser, loadingUsers, onUserSelectedForm, onOpenUserForm, onCloseUserForm, loadingUserError } from "../store/slices/users/usersSlice";
 import { useAuth } from "../auth/hooks/useAuth";
+import useThemedSwal from "../helpers/useThemedSwal";
 
 export const useUsers = () => {
     
+    const Swal = useThemedSwal();
     const { users, userSelected, visibleForm, errors, isLoading, paginator } = useSelector(state => state.users);
     const dispatch = useDispatch();
 

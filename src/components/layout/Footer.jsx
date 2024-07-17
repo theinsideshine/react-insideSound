@@ -5,6 +5,7 @@ import { IconButton } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import { CopyrightRight } from './FooterCopyright';
 
+
 export const Footer = () => {
   return (
     <Box
@@ -61,6 +62,7 @@ export const Footer = () => {
         </Box>
       </Box>
       <CopyrightRight sx={{ mt: 5 }} />
+      
     </Box>
   );
 };

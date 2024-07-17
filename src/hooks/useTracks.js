@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { loadingTracks, initialTrackForm, addTrack, loadingTrackError, removeTrack, updateTrack, onTrackSelectedModalForm, onOpenTrackModalForm, onCloseTrackModalForm} from "../store/slices/tracks/tracksSlice";
 import { serviceAssociateAlbumToTrack, serviceFindAllTrackByUser, serviceRemoveTrack, serviceSaveTrack, serviceUpdateTrack } from "../services/tracksService";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import useThemedSwal from "../helpers/useThemedSwal";
 
 
 
 export const useTracks = () => {   
 
-
+    const Swal = useThemedSwal();
     const { tracks, trackSelected, errors ,isLoading,visibleModalForm } = useSelector(state => state.tracks);
     const dispatch = useDispatch();
 

@@ -2,13 +2,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { loadingAlbums, initialAlbumForm, addAlbum, updateAlbum, removeAlbum, loadingAlbumError } from "../store/slices/albums/albumsSlice";
 import {  serviceFindAllAlbum, serviceFindAllAlbumByUsername, serviceFindPublicAlbumsByUsername, serviceRemoveAlbum, serviceSaveAlbum, serviceUpdateAlbum } from "../services/albumsService";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import useThemedSwal from "../helpers/useThemedSwal";
 
 
 export const useAlbums = () => {
 
-    
+    const Swal = useThemedSwal();
     
     const { albums,albumSelected, errors, isLoading } = useSelector(state => state.albums);
 
@@ -110,8 +110,8 @@ export const useAlbums = () => {
             text: "Cuidado el album sera eliminado!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            /* confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33', */
             confirmButtonText: 'Si, eliminar!'
         }).then( async(result) => {
             if (result.isConfirmed) {
