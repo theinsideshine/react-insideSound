@@ -2,10 +2,10 @@ import React from 'react';
 import { CssBaseline, Typography, useMediaQuery, Grid, Box, Button } from '@mui/material';
 import deckRetroImage from '../../assets/deck-retro.png';
 import { useTheme } from '@mui/material/styles';
-import VintageVibesSection from './components/VintageVibesSection';
-import SoundArchitectSection from './components/SoundArchitectSection';
-import TestimonialsSection from './components/TestimonialsSection';
-import SignupSection from './components/SignupSection';
+import VintageVibesSection from './sections/VintageVibesSection';
+import SoundArchitectSection from './sections/SoundArchitectSection';
+import TestimonialsSection from './sections/TestimonialsSection';
+import SignupSection from './sections/SignupSection';
 
 export const HomePage = () => {
   const theme = useTheme(); // Obtén el tema actual
