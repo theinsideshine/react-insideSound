@@ -52,7 +52,7 @@ export const HomePage = () => {
   <Button
     variant="contained"
     sx={{
-      width: '20%', // Ancho del botón al 100% del contenedor
+      width: isMobile ? '50%' : '20%', // Ajusta el ancho del botón dependiendo del tamaño del viewport
       height: '40px', // Altura del botón
       bgcolor: 'primary.main',
       color: 'white',
