@@ -28,7 +28,7 @@ Home Page
 
 ![](images/home-page5.png)
 
-![](images/home-page-mobile.png.png)
+![](images/home-page-mobile.png)
 
 Show public album by username
 ![](images/showAlbumPublic.png)
