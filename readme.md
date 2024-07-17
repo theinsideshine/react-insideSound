@@ -58,7 +58,7 @@ add track to album
 
 
 View audioPlayer
-![](images/add-track-to-album.png.png)
+![](images/audio-player.png)
 
 
 View trackEdit
