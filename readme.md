@@ -28,111 +28,49 @@ Home Page
 
 ![](images/home-page5.png)
 
-![](images/home-page-mobile.png)
 
 Show public album by username
-![](images/showAlbumPublic.png)
-
-![](images/showAlbumPublic-dark.png)
-
-![](images/showAlbumPublic-mobile.png)
+![](images/show-album-public.png)
 
 
 SignIn
-![](images/signIn.png)
-
-![](images/signIn-dark.png)
-
-![](images/signIn-mobile.png)
+![](images/sing-in.png)
 
 
 SignUp
-![](images/signUp.png)
-
-![](images/signUp-dark.png))
-
-![](images/signUp-mobile.png)
+![](images/sing-up.png)
 
 
 View albums list 
-![](images/albums.png)
-
-![](images/albums-dark.png)
-
-![](images/albums-mobile.png)
+![](images/album-list.png)
 
 
 View album edit 
-![](images/editAlbums.png)
-
-![](images/editAlbums-dark.png)
-
-![](images/editAlbums-mobile.png)
+![](images/album-edit.png)
 
 
 View tracks list 
-![](images/trackList.png)
-
-![](images/trackList-dark.png)
-
-![](images/trackList-mobile.png)
+![](images/track-list.png)
 
 
 add track to album 
-![](images/addTrackToAlbum.png)
-
-![](images/addTrackToAlbum-dark.png)
-
-![](images/addTrackToAlbum-mobile.png)
+![](images/add-track-to-album.png)
 
 
 View audioPlayer
-![](images/audioPlayerInside.png)
-
-![](images/audioPlayer-dark.png)
-
-![](images/audioPlayer-mobile.png) 
+![](images/add-track-to-album.png.png)
 
 
 View trackEdit
-![](images/trackEdit.png)
-
-![](images/trackEdit-dark.png)
-
-![](images/trackEdit-mobile.png)
-
-
-View errors trackEdit 
-![](images/trackEditError.png)
-
-![](images/trackEditError-mobile.png)
+![](images/track-edit.png)
 
 
 View users list
-![](images/listUser.png)
-
-![](images/listUser-dark.png)
-
-![](images/listUser-mobile.png)
+![](images/user-list.png)
 
 
 View users edit
-![](images/userEdit.png)
-
-![](images/userEdit-dark.png)
-
-![](images/editUser-mobile.png)
-
-
-
-NavbarMobile
-
-
-![](images/navbarMobile.png)
-
-![](images/NavbarMobile-dark.png)
-
-
+![](images/user-edit.png)
 
 
 
