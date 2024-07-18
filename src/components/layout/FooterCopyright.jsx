@@ -13,7 +13,7 @@ export function CopyrightRight(props) {
         </Link>{' '}
         {new Date().getFullYear()}
         {'-'}
-        <Link color="inherit" href="https://github.com/theinsideshine/react-insideSound/tree/changeUi" variant="body2">
+        <Link color="inherit" href="https://github.com/theinsideshine/react-insideSound" variant="body2">
           GitHub/FrontEnd
         </Link>{' '}
       </Typography>

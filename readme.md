@@ -14,7 +14,7 @@ Using Figma with AI plugins, and GPT-4 with images to adapt the branch master co
 
 
 CustomHooks-Redux-Axios
-[![CustomsHooks](images/video-hooks.png)](https://www.youtube.com/watch?v=Z2xHULXZpxk)
+[![Figma-Ai](images/video-figma.png)](https://www.youtube.com/watch?v=77vaX4F4vsE)
 
 
 Home Page 
