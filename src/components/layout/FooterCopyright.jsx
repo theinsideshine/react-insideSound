@@ -15,7 +15,11 @@ export function CopyrightRight(props) {
         {'-'}
         <Link color="inherit" href="https://github.com/theinsideshine/react-insideSound" variant="body2">
           GitHub/FrontEnd
+        </Link>{'-'}
+        <Link color="inherit" href="https://youtu.be/JTr69ZPiLQg" variant="body2">
+          Demo de uso
         </Link>{' '}
+
       </Typography>
     );
   }

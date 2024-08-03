@@ -33,7 +33,7 @@ export const AppRoutes = ({ toggleDarkMode }) => {
                             )
                             : <>
                                 <Route path='/login' element={<LoginPage />} />
-                                <Route path='/signup' element={<SignUp />} />
+                                {/* <Route path='/signup' element={<SignUp />} />  */}
                                 <Route path='/*' element={<HomePage/>} />
                                 <Route path="/home/albums/:username" element={<HomePageAlbum/>} />
                                 <Route path="albums/homeplay/:id" element={<HomePagePlay />} />

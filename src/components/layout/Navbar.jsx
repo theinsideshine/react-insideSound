@@ -25,17 +25,21 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import { serviceFindAllUsernames } from "../../services/userService";
-import Swal from "sweetalert2";
+
 import { useTheme, alpha } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
+import useThemedSwal from "../../helpers/useThemedSwal";
 
 export const Navbar = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const { login, handlerLogout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("guardian");
   const [usernames, setUsernames] = useState([]);
+
+
+  const Swal = useThemedSwal();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -183,6 +187,7 @@ export const Navbar = () => {
         </Hidden>
 
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
+        {/* <span style={{ color: "red" }}>Click y Enter</span> */}
           <div
             style={{
               position: "relative",
@@ -194,6 +199,7 @@ export const Navbar = () => {
               width: "auto",
             }}
           >
+            
             <div
               style={{
                 padding: theme.spacing(0, 2),
@@ -205,6 +211,7 @@ export const Navbar = () => {
                 justifyContent: "center",
               }}
             >
+              
               <SearchIcon />
             </div>
             <InputBase
@@ -228,6 +235,7 @@ export const Navbar = () => {
             sx={{ marginRight: "10px", fontFamily: "'Courier New', Courier, monospace" }}
           >
             {login.user?.username}
+            
           </Typography>
           {login.user?.username ? (
             <IconButton color="inherit" onClick={handlerLogout}>
@@ -238,11 +246,11 @@ export const Navbar = () => {
               <IconButton color="inherit" onClick={clickLogin}>
                 <LoginIcon />
               </IconButton>
-              <IconButton color="inherit" onClick={clickSignup}>
+              {/* <IconButton color="inherit" onClick={clickSignup}>
                 <AppRegistrationIcon />
-              </IconButton>
+              </IconButton> */}
             </>
-          )}
+          )} 
         </div>
       </Toolbar>
     </AppBar>
