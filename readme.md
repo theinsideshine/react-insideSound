@@ -20,19 +20,33 @@ Figma-muscho-gpt4-react
 
 Parts of this first stage
 FrontEnd:
+
 -CustomHooks-Redux-Axios
+
 -ErrorSystem
+
 -Figma-muscho-gpt4-react
+
 BackEnd:
+
 -Spring Security and Spring Cloud Gateway
+
 -ErrorSystem
+
 -DataModel
+
 -Construction of the containers
+
 -Deploy in minikube
+
 -ISound.Migration of the ecosystems to a monolithic service that meets the design guidelines
--Openapi and junit implementation    
+
+-Openapi and junit implementation 
+
 -Message queue-Description characteristics, aspects, communication in microservices architecture
+
 -Investigation to find the stress point of the system. Jmeter-App Custom multithread request(py) The stress point was searched where the Aws-Rds database is loaded. Jmeter and a proprietary app written in python were used
+
 
 Deploy-demo
 [![Deploy-demo](images/video-deploy.png)](https://youtu.be/JTr69ZPiLQg)
